@@ -1,3 +1,25 @@
+/* Fresha booking: paste your exact public Fresha booking URL below. */
+const FRESHA_BOOKING_URL = '';
+
+document.querySelectorAll('[data-fresha]').forEach(link => {
+  const isValidFreshaUrl = (() => {
+    try {
+      const url = new URL(FRESHA_BOOKING_URL);
+      return url.protocol === 'https:' && (url.hostname === 'fresha.com' || url.hostname.endsWith('.fresha.com'));
+    } catch { return false; }
+  })();
+  if (isValidFreshaUrl) {
+    link.href = FRESHA_BOOKING_URL;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+  } else {
+    link.addEventListener('click', event => {
+      event.preventDefault();
+      alert('Fresha booking link coming soon. For now, please message me on Instagram @EDZBARBER.');
+    });
+  }
+});
+
 /* Instagram: @EDZBARBER */
 const INSTAGRAM_USERNAME = 'EDZBARBER';
 

@@ -14,3 +14,6 @@ Static site ready for Vercel: no framework, no build step.
 4. Click **Deploy**. Vercel provides a `.vercel.app` address.
 
 All buttons marked for Instagram open your profile in a new tab. Visitors can then select **Message** in Instagram to DM you. Instagram does not guarantee a public URL that opens a prefilled DM for every account.
+
+## Fresha
+In `script.js`, replace the empty `FRESHA_BOOKING_URL` with the full public booking link for your own Fresha profile. All Fresha links use this one setting. Until configured, they show a message rather than sending customers to an incorrect booking page.
