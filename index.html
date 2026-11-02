@@ -1,523 +1,207 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="en-GB">
 
 <head>
-  <!-- Google tag (gtag.js) -->
-
-
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport" />
-  <meta content="#101615" name="theme-color" />
-  <meta
-    content="Men’s haircuts for £17 at EDZ Barber inside Novo Studios, 47–51 Norfolk Street, Cambridge CB1 2LD. Walk-ins welcome, or book on Fresha."
-    name="description" />
-  <meta content="EDZ Barber Cambridge | Men’s Haircuts £17" property="og:title" />
-  <meta
-    content="Fresh fades and men’s haircuts at Novo Studios, Cambridge. £17 standard haircut. Walk-ins welcome or book ahead."
-    property="og:description" />
-  <meta content="website" property="og:type" />
-  <link href="style.css" rel="stylesheet" />
-  <title>EDZ Barber Cambridge | Men’s Haircuts £17 · Walk-ins Welcome</title>
-  <link href="./favicon.svg" rel="icon" type="image/svg+xml" />
-  <!-- Cookie consent defaults are set BEFORE any optional analytics or ad tags. -->
-  <script>
-    (function () {
-      'use strict';
-      var STORAGE_KEY = 'edzbarber_cookie_consent_v1';
-      var DURATION_MS = 180 * 24 * 60 * 60 * 1000;
-      var state = null;
-      try {
-        var saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
-        if (saved && saved.version === 1 && typeof saved.analytics === 'boolean' &&
-          typeof saved.marketing === 'boolean' && typeof saved.savedAt === 'number' &&
-          Date.now() - saved.savedAt >= 0 && Date.now() - saved.savedAt < DURATION_MS) {
-          state = saved;
-        }
-      } catch (error) { /* Preferences remain unset if storage is unavailable. */ }
-
-      window.dataLayer = window.dataLayer || [];
-      window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
-      window.gtag('consent', 'default', {
-        analytics_storage: 'denied',
-        ad_storage: 'denied',
-        ad_user_data: 'denied',
-        ad_personalization: 'denied',
-        functionality_storage: 'granted',
-        security_storage: 'granted',
-        wait_for_update: 500
-      });
-
-      function updateGoogleConsent(preferences) {
-        window.gtag('consent', 'update', {
-          analytics_storage: preferences.analytics ? 'granted' : 'denied',
-          ad_storage: preferences.marketing ? 'granted' : 'denied',
-          ad_user_data: preferences.marketing ? 'granted' : 'denied',
-          ad_personalization: preferences.marketing ? 'granted' : 'denied'
-        });
-      }
-      if (state) updateGoogleConsent(state);
-
-      window.EDZCookieConsent = {
-        get: function () { return state ? Object.assign({}, state) : null; },
-        analyticsAllowed: function () { return Boolean(state && state.analytics); },
-        marketingAllowed: function () { return Boolean(state && state.marketing); },
-        save: function (preferences) {
-          state = {
-            version: 1,
-            necessary: true,
-            analytics: Boolean(preferences.analytics),
-            marketing: Boolean(preferences.marketing),
-            savedAt: Date.now()
-          };
-          try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (error) {
-            /* Consent still applies for the current visit. */
-          }
-          updateGoogleConsent(state);
-          window.dispatchEvent(new CustomEvent('edz:consent-updated', { detail: Object.assign({}, state) }));
-        }
-      };
-    }());
-  </script>
-  <script async="" src="https://www.googletagmanager.com/gtag/js?id=AW-18502199382"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'AW-18502199382');
-  </script>
-  <link href="https://www.edzbarber.co.uk/" rel="canonical" />
-  <meta content="https://www.edzbarber.co.uk/" property="og:url" />
-  <meta content="index,follow" name="robots" />
-  <script
-    type="application/ld+json">{"@context":"https://schema.org","@type":"BarberShop","name":"EDZ Barber","url":"https://www.edzbarber.co.uk/","description":"Men’s haircuts and fades at Novo Studios in Cambridge. Walk-ins welcome, subject to availability.","address":{"@type":"PostalAddress","streetAddress":"47–51 Norfolk Street","addressLocality":"Cambridge","postalCode":"CB1 2LD","addressCountry":"GB"},"priceRange":"£17 standard men’s haircut; other services vary","hasMap":"https://www.google.com/maps/dir/?api=1&destination=47-51%20Norfolk%20Street%2C%20Cambridge%20CB1%202LD"}</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#111816">
+  <meta name="description"
+    content="EDZ Barber in Cambridge. Clean fades, classic gents' haircuts and personalised barbering. Men's haircuts £17. Contact Eduardo to enquire about future appointments.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="EDZ Barber Cambridge | Fresh Cuts. Clean Fades.">
+  <meta property="og:description"
+    content="Men's haircuts £17. A personal barbering experience in Cambridge. Enquire about appointments via WhatsApp or Instagram.">
+  <meta property="og:url" content="https://www.edzbarber.co.uk/">
+  <link rel="canonical" href="https://www.edzbarber.co.uk/">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <title>EDZ Barber Cambridge | Men's Haircuts £17</title>
 </head>
 
 <body>
-  <div class="announcement">MEN’S HAIRCUTS £17 · WALK-INS WELCOME · CAMBRIDGE CB1</div>
-  <header class="header">
-    <nav aria-label="Main navigation" class="nav wrap">
-      <a aria-label="EDZ Barber home" class="brand" href="#top"><span aria-hidden="true"
-          class="brand-emblem">EDZ</span><span>EDZ<span>BARBER</span></span></a>
-      <div class="nav-links"><a href="#prices">Prices</a><a href="#about">About</a><a href="#how-it-works">How it
-          works</a><a href="#location">Location</a></div>
-      <a class="button button-primary button-small direction-link"
-        href="https://www.google.com/maps/dir/?api=1&amp;destination=47-51%20Norfolk%20Street%2C%20Cambridge%20CB1%202LD"
-        rel="noopener noreferrer" target="_blank">
-        <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
-          <path d="m3 11 18-8-8 18-2-8-8-2Z"></path>
-        </svg>Get Directions
-      </a>
+  <div class="announcement">EDZ BARBER · CAMBRIDGE · PRIVATE STUDIO IN PREPARATION</div>
+  <header class="site-header">
+    <nav class="wrap navbar" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="EDZ Barber home"><span class="brand-mark">EDZ</span><span>EDZ<span
+            class="brand-accent">BARBER</span></span></a>
+      <div class="nav-links"><a href="#services">Services</a><a href="#about">About</a><a
+          href="#appointments">Appointments</a><a href="#faq">FAQ</a></div>
+      <a class="btn btn-small btn-lime"
+        href="https://wa.me/447387771879?text=Hi%20Eduardo%2C%20I%27d%20like%20to%20enquire%20about%20EDZ%20Barber%20appointments."
+        target="_blank" rel="noopener noreferrer">Enquire on WhatsApp <span aria-hidden="true">↗</span></a>
     </nav>
   </header>
   <main id="top">
-    <section aria-labelledby="hero-title" class="hero">
+    <section class="hero" aria-labelledby="hero-heading">
       <div class="wrap hero-grid">
-        <div>
-          <div class="eyebrow">Cambridge · Norfolk Street</div>
-          <h1 id="hero-title"><span class="line">FRESH CUTS.</span><span class="line">CLEAN FADES.</span><span
-              class="line highlight">£17 HAIRCUTS.</span></h1>
-          <p class="hero-sub">Sharp, personalised men’s haircuts at <strong style="color:#fff">EDZ Barber</strong>,
-            inside <strong style="color:#fff">Novo Studios</strong> in Cambridge. </p>
-          <div class="hero-actions">
-            <a class="button button-primary direction-link"
-              href="https://www.google.com/maps/dir/?api=1&amp;destination=47-51%20Norfolk%20Street%2C%20Cambridge%20CB1%202LD"
-              rel="noopener noreferrer" target="_blank">
-              <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
-                <path d="m3 11 18-8-8 18-2-8-8-2Z"></path>
-              </svg>Get Directions
-              <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
-                <path d="M5 12h14m-6-6 6 6-6 6"></path>
-              </svg>
-            </a>
-            <a class="button button-outline" href="https://fresha.com/p/eduardo-silva-6622497" rel="noopener noreferrer"
-              target="_blank">Book an Appointment <svg aria-hidden="true" fill="none" stroke="currentColor"
-                stroke-width="2" viewbox="0 0 24 24">
-                <path d="M5 12h14m-6-6 6 6-6 6"></path>
-              </svg></a>
-          </div>
-          <div class="hero-notes"><span><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
-                <path d="m5 12 4 4L19 6"></path>
-              </svg> Walk-ins welcome</span><span><svg fill="none" stroke="currentColor" stroke-width="2"
-                viewbox="0 0 24 24">
-                <path d="m5 12 4 4L19 6"></path>
-              </svg> No booking required</span><span><svg fill="none" stroke="currentColor" stroke-width="2"
-                viewbox="0 0 24 24">
-                <path d="m5 12 4 4L19 6"></path>
-              </svg> Cambridge CB1</span></div>
-
+        <div class="hero-copy">
+          <p class="eyebrow">INDEPENDENT BARBER · CAMBRIDGE</p>
+          <h1 id="hero-heading">FRESH CUTS.<br>CLEAN FADES.<br><span>YOUR STYLE.</span></h1>
+          <p class="lead">Sharp, personalised men's haircuts with attention to detail. EDZ Barber is preparing a
+            private, appointment-only studio in Cambridge.</p>
+          <div class="hero-actions"><a class="btn btn-lime"
+              href="https://wa.me/447387771879?text=Hi%20Eduardo%2C%20I%27d%20like%20to%20enquire%20about%20EDZ%20Barber%20appointments."
+              target="_blank" rel="noopener noreferrer">Ask about appointments <span aria-hidden="true">↗</span></a><a
+              class="btn btn-outline" href="https://www.instagram.com/edzbarber/" target="_blank"
+              rel="noopener noreferrer">View Instagram <span aria-hidden="true">↗</span></a></div>
+          <div class="hero-benefits"><span>✓ £17 standard haircut</span><span>✓ Personal attention</span><span>✓
+              Cambridge</span></div>
         </div>
-        <div aria-label="EDZ Barber standard £17 men’s haircut price" class="poster">
-          <div class="poster-mark">EDZ Barber · Cambridge</div>
-          <div class="poster-price"><sup>£</sup>17</div>
-          <div class="poster-line"></div>
-          <div class="poster-text">Men’s<br />haircut</div>
-          <div class="poster-caption">Every visit · standard price</div>
-          <div aria-hidden="true" class="poster-stamp">WALK<br />INS<br />WELCOME</div>
+        <div class="price-poster" aria-label="Men's haircut, £17 standard price">
+          <div class="poster-inner">
+            <div class="poster-overline">EDZ BARBER / CAMBRIDGE</div>
+            <div class="huge-price"><sup>£</sup>17</div>
+            <div class="poster-rule"></div><strong>MEN'S<br>HAIRCUT</strong><small>STANDARD PRICE · NOT A
+              PROMOTION</small>
+          </div>
         </div>
       </div>
     </section>
-    <div class="stripe">
-      <div class="wrap stripe-inner"><span>Fresh fades</span><span class="stripe-dot">✳</span><span>Men's
-          haircuts</span><span class="stripe-dot">✳</span><span>Walk-ins welcome</span><span
-          class="stripe-dot">✳</span><span>Cambridge CB1</span></div>
+    <div class="ribbon">
+      <div class="wrap ribbon-inner"><span>FRESH FADES</span><span>✳</span><span>GENTS'
+          HAIRCUTS</span><span>✳</span><span>PERSONALISED SERVICE</span><span>✳</span><span>CAMBRIDGE</span></div>
     </div>
-    <section aria-labelledby="prices-title" class="section" id="prices">
+    <section id="services" class="section">
       <div class="wrap">
-        <div class="section-heading">
+        <div class="section-top">
           <div>
-            <p class="section-kicker">Visit EDZ Barber</p>
-            <h2 id="prices-title">Come for the cut.<br />Stay for the confidence.</h2>
+            <p class="kicker">THE SERVICES</p>
+            <h2>Look sharp.<br>Feel confident.</h2>
           </div>
-          <p class="section-aside">Clear, straightforward prices. Choose a classic men’s haircut or explore other
-            services and availability on Fresha.</p>
+          <p class="section-aside">Straightforward barbering with a focus on getting the details right. Ask about the
+            service you need when enquiring.</p>
         </div>
         <div class="service-grid">
-          <div class="service-feature">
-            <div class="card-kicker">Standard price</div>
-            <div class="feature-big">£17</div>
-            <h3 style="font-size:25px;letter-spacing:-.04em;margin:0 0 6px">Men’s Haircut</h3>
-
-          </div>
-          <div class="service">
-            <div class="service-icon"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9"
-                viewbox="0 0 24 24">
-                <path d="M3 6h18M6 3v6m6-6v6m6-6v6M6 13h12M8 13v8m8-8v8"></path>
-              </svg></div>
+          <article class="service-card featured">
+            <p class="overline">STANDARD PRICE</p><strong class="service-big">£17</strong>
+            <h3>Men's Haircut</h3>
+            <p>Clean, tailored cut to suit your look. £17 is the regular price, not a first-visit offer.</p>
+          </article>
+          <article class="service-card">
+            <div class="service-icon">✳</div>
             <h3>Skin Fade</h3>
-            <p>Clean sides and a sharp fade, tailored to your style.</p><a class="service-price"
-              href="https://www.fresha.com/p/eduardo-silva-6622497?share=true&amp;pId=3115817" rel="noopener noreferrer"
-              target="_blank">Check service price &amp; book ↗</a>
-          </div>
-          <div class="service">
-            <div class="service-icon"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9"
-                viewbox="0 0 24 24">
-                <path d="M4 7c4-4 12-4 16 0M5 12c4-2 10-2 14 0M7 17c3-1 7-1 10 0"></path>
-              </svg></div>
-            <h3>Classic Haircut</h3>
-            <p>A tidy, timeless style for everyday wear.</p><a class="service-price"
-              href="https://www.fresha.com/p/eduardo-silva-6622497?share=true&amp;pId=3115817" rel="noopener noreferrer"
-              target="_blank">Check service price &amp; book ↗</a>
-          </div>
+            <p>A close, smooth blend with a sharp finish. Ask for availability and pricing.</p><a
+              href="https://wa.me/447387771879?text=Hi%20Eduardo%2C%20could%20you%20tell%20me%20about%20skin%20fade%20pricing%20and%20availability%3F"
+              target="_blank" rel="noopener noreferrer">Enquire about skin fades ↗</a>
+          </article>
+          <article class="service-card">
+            <div class="service-icon">✳</div>
+            <h3>Classic Cut</h3>
+            <p>A timeless, neat style finished with care. Ask for availability and pricing.</p><a
+              href="https://wa.me/447387771879?text=Hi%20Eduardo%2C%20could%20you%20tell%20me%20about%20classic%20haircut%20availability%3F"
+              target="_blank" rel="noopener noreferrer">Enquire about classic cuts ↗</a>
+          </article>
         </div>
-
       </div>
     </section>
-    <!-- Optional gallery: add your own REAL haircut photographs as assets/cut-1.jpg, cut-2.jpg, cut-3.jpg.
-         This section stays hidden if no real photos have been uploaded. -->
-    <section aria-labelledby="work-title" class="section photo-gallery" hidden="True" id="real-cuts">
-      <div class="wrap">
-        <div class="section-heading">
-          <div>
-            <p class="section-kicker">My work</p>
-            <h2 id="work-title">Real cuts.<br />Real results.</h2>
-          </div>
-          <p class="section-aside">A closer look at haircuts done by EDZ Barber.</p>
-        </div>
-        <div class="photo-grid" id="photo-grid"></div>
-      </div>
-    </section>
-    <section aria-labelledby="about-title" class="section about-section" id="about">
+    <section id="about" class="section about">
       <div class="wrap about-grid">
         <div>
-          <p class="section-kicker">Meet your barber</p>
-          <h2 id="about-title">A fresh cut.<br />A personal touch.</h2>
-          <p class="about-copy">Hi, I’m Eduardo, the barber behind EDZ Barber. Based at Novo Studios in Cambridge, I
-            focus on clean finishes, careful attention to detail and a haircut that suits you. Whether you prefer a
-            classic cut or a fresh fade, you can talk me through the look you want.</p>
-          <div class="about-actions"><a class="button button-dark" href="https://www.fresha.com/p/eduardo-silva-6622497"
-              rel="noopener noreferrer" target="_blank">See my work &amp; book ↗</a><a class="about-secondary"
-              href="#location">Find the studio →</a></div>
+          <p class="kicker">MEET YOUR BARBER</p>
+          <h2>Hi, I'm Eduardo.</h2>
+          <p>I'm the barber behind EDZ Barber in Cambridge. I focus on clean fades, classic cuts and taking the time to
+            understand the style you're after.</p>
+          <p>I'm currently working towards opening a small private studio. For updates and enquiries, reach out directly
+            on WhatsApp or Instagram.</p><a class="btn btn-dark" href="https://www.instagram.com/edzbarber/"
+            target="_blank" rel="noopener noreferrer">Explore my work on Instagram ↗</a>
         </div>
-        <div class="about-panel"><span aria-hidden="true" class="about-symbol">EDZ</span>
-          <p class="about-panel-eyebrow">Independent barber · Cambridge</p>
-          <h3>Your style, done with care.</h3>
-          <p>Clear pricing. Friendly service. No fuss.</p>
-        </div>
-      </div>
-    </section>
-    <section aria-labelledby="how-title" class="how" id="how-it-works">
-      <div class="wrap">
-        <p class="section-kicker">Easy from start to finish</p>
-        <h2 id="how-title">Three steps.<br />One fresh haircut.</h2>
-        <div class="how-grid">
-          <div class="step">
-            <div class="step-num">01 / CHECK THE PRICE</div>
-            <h3>See the haircut price</h3>
-            <p>Our standard men’s haircut is £17. Other services and current prices are listed on Fresha.</p>
-          </div>
-          <div class="step">
-            <div class="step-num">02 / FIND THE STUDIO</div>
-            <h3>Get directions in one tap</h3>
-            <p>Find Novo Studios on Norfolk Street, Cambridge. Google Maps opens with the destination ready.</p>
-          </div>
-          <div class="step">
-            <div class="step-num">03 / WALK IN OR BOOK</div>
-            <h3>Ask for EDZ Barber</h3>
-            <p>Walk-ins are welcome, or book a time through Fresha for peace of mind.</p>
-          </div>
+        <div class="about-panel"><span>EDZ</span>
+          <p>INDEPENDENT BARBER<br>CAMBRIDGE, UK</p>
+          <h3>YOUR CUT.<br>YOUR STYLE.</h3>
+          <div class="panel-line"></div><small>Clean details. Personal service. No fuss.</small>
         </div>
       </div>
     </section>
-    <section aria-labelledby="location-title" class="location" id="location">
-      <div class="wrap location-grid">
+    <section id="appointments" class="booking">
+      <div class="wrap booking-grid">
         <div>
-          <p class="section-kicker">Find me in Cambridge</p>
-          <h2 id="location-title">Your next cut<br />is around the corner.</h2>
-          <p class="location-desc">I'm based inside <strong style="color:white">Novo Studios</strong> on Norfolk Street.
-            Tap below and Google Maps will fill in the destination for you — no copying and pasting the address.</p>
-          <p class="availability-note"><strong>Walk-ins welcome</strong>. For a guaranteed appointment
-            time, please use Fresha to check current booking slots.</p>
-          <div class="address"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"
-              viewbox="0 0 24 24">
-              <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path>
-              <circle cx="12" cy="10" r="2.5"></circle>
-            </svg>
-            <div><strong>Novo Studios</strong><span>47–51 Norfolk Street<br />Cambridge CB1 2LD<br />United
-                Kingdom</span>
+          <p class="kicker kicker-bright">APPOINTMENT ENQUIRIES</p>
+          <h2>Simple to<br>get in touch.</h2>
+          <p class="booking-lead">The private studio is being prepared. Enquiries are welcome, but appointments at this
+            location are not yet confirmed. I'll share availability and full location details once the studio is ready
+            to operate.</p>
+          <div class="booking-buttons"><a class="btn btn-lime"
+              href="https://wa.me/447387771879?text=Hi%20Eduardo%2C%20I%27d%20like%20to%20enquire%20about%20EDZ%20Barber%20appointments."
+              target="_blank" rel="noopener noreferrer">Message on WhatsApp ↗</a><a class="btn btn-outline"
+              href="https://www.instagram.com/edzbarber/" target="_blank" rel="noopener noreferrer">Instagram DM ↗</a>
+          </div>
+        </div>
+        <div class="steps">
+          <div class="step"><span>01</span>
+            <div><strong>Send a message</strong>
+              <p>Tell me which haircut you'd like and when you're generally available.</p>
             </div>
           </div>
-          <div class="location-actions"><a class="button button-primary direction-link"
-              href="https://www.google.com/maps/dir/?api=1&amp;destination=47-51%20Norfolk%20Street%2C%20Cambridge%20CB1%202LD"
-              rel="noopener noreferrer" target="_blank"><svg aria-hidden="true" fill="none" stroke="currentColor"
-                stroke-width="2" viewbox="0 0 24 24">
-                <path d="m3 11 18-8-8 18-2-8-8-2Z"></path>
-              </svg> Open Google Maps</a><a class="button button-outline"
-              href="https://www.fresha.com/p/eduardo-silva-6622497?share=true&amp;pId=3115817" rel="noopener noreferrer"
-              target="_blank">Prefer to book? Fresha ↗</a></div>
-        </div>
-        <div aria-label="Novo Studios location information in Cambridge" class="location-art">
-          <div class="map-token">
-            <div class="pin-circ"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"
-                viewbox="0 0 24 24">
-                <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path>
-                <circle cx="12" cy="10" r="2.5"></circle>
-              </svg></div><strong>Novo Studios</strong><span>47–51 NORFOLK STREET · CAMBRIDGE CB1</span>
+          <div class="step"><span>02</span>
+            <div><strong>Check availability</strong>
+              <p>I'll let you know when booking becomes available and confirm the details.</p>
+            </div>
           </div>
-          <div class="map-label">GOOGLE MAPS READY ↗</div>
+          <div class="step"><span>03</span>
+            <div><strong>Get the details privately</strong>
+              <p>Once the studio is open, the exact address will only be shared with confirmed customers.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
-    <section aria-labelledby="faq-title" class="faq-section" id="faq">
+    <section id="faq" class="section faq">
       <div class="wrap faq-grid">
         <div>
-          <p class="section-kicker">Good to know</p>
-          <h2 id="faq-title">Got a<br />question?</h2>
+          <p class="kicker">GOOD TO KNOW</p>
+          <h2>Got a<br>question?</h2>
         </div>
         <div>
           <details>
-            <summary>What are your opening hours?</summary>
-            <p>Appointment availability and bookable times are shown on my <a
-                href="https://www.fresha.com/p/eduardo-silva-6622497" rel="noopener noreferrer"
-                style="text-decoration:underline" target="_blank">Fresha profile</a>. Walk-ins depend on availability,
-              so booking ahead is the safest option if you are making a special journey.</p>
+            <summary>Is EDZ Barber accepting appointments now?</summary>
+            <p>The private studio is still being prepared. You can enquire via WhatsApp or Instagram, but appointments
+              there are not currently confirmed.</p>
           </details>
           <details>
-            <summary>Do I need to book an appointment?</summary>
-            <p>No. Walk-ins are welcome at EDZ Barber, based inside Novo Studios. Please note that immediate
-              availability can vary.</p>
+            <summary>Where will the studio be?</summary>
+            <p>In Cambridge. For privacy, the exact residential address won't be published online. Details will be
+              shared privately once a booking is confirmed and the studio is ready.</p>
           </details>
           <details>
-            <summary>Is £17 a first-visit promotion?</summary>
-            <p>No. £17 is the standard price of a Men’s Haircut at EDZ Barber, not a new-client discount. Prices for
-              other services may differ — check Fresha for the latest list.</p>
+            <summary>Can I walk in without booking?</summary>
+            <p>No. The planned private studio will operate by appointment only, rather than accepting walk-ins.</p>
           </details>
           <details>
-            <summary>Will Get Directions open Google Maps?</summary>
-            <p>The button opens a Google Maps directions link with our address already entered. Your phone may open the
-              Google Maps app if installed, or the map in your browser.</p>
+            <summary>Is £17 a promotional price?</summary>
+            <p>No. £17 is the standard price of a men's haircut. Other services may be priced differently.</p>
           </details>
           <details>
-            <summary>Can I still book through Fresha?</summary>
-            <p>Yes. If you prefer to reserve a time, you can <a
-                href="https://www.fresha.com/p/eduardo-silva-6622497?share=true&amp;pId=3115817"
-                rel="noopener noreferrer" style="text-decoration:underline" target="_blank">view my Fresha profile</a>.
-            </p>
+            <summary>How do I get in touch?</summary>
+            <p>Use the WhatsApp button or send a message to <a href="https://www.instagram.com/edzbarber/"
+                target="_blank" rel="noopener noreferrer">@edzbarber on Instagram</a>.</p>
           </details>
         </div>
       </div>
     </section>
-    <section class="bottom-cta">
-      <div class="wrap bottom-inner">
+    <section class="final-cta">
+      <div class="wrap cta-inner">
         <div>
-          <h2>Ready for a fresh cut?</h2>
-          <p>Men’s haircut £17 · Walk-ins welcome · Cambridge CB1</p>
-        </div><a class="button button-dark direction-link"
-          href="https://www.google.com/maps/dir/?api=1&amp;destination=47-51%20Norfolk%20Street%2C%20Cambridge%20CB1%202LD"
-          rel="noopener noreferrer" target="_blank"><svg aria-hidden="true" fill="none" stroke="currentColor"
-            stroke-width="2" viewbox="0 0 24 24">
-            <path d="m3 11 18-8-8 18-2-8-8-2Z"></path>
-          </svg>Get Directions Now</a>
+          <h2>A fresh look starts here.</h2>
+          <p>EDZ Barber · Cambridge · Haircuts £17</p>
+        </div><a class="btn btn-dark"
+          href="https://wa.me/447387771879?text=Hi%20Eduardo%2C%20I%27d%20like%20to%20enquire%20about%20EDZ%20Barber%20appointments."
+          target="_blank" rel="noopener noreferrer">Contact Eduardo ↗</a>
       </div>
     </section>
   </main>
-  <footer class="footer">
-    <div class="wrap footer-inner"><span><strong>EDZ BARBER</strong> · Based at Novo Studios,
-        Cambridge</span><span>47–51 Norfolk Street, Cambridge CB1 2LD</span><span><a
-          href="https://www.fresha.com/p/eduardo-silva-6622497?share=true&amp;pId=3115817" rel="noopener noreferrer"
-          target="_blank">Book via Fresha ↗</a></span><span><button class="cookie-footer-button"
-          id="cookie-settings-footer" type="button">Cookie settings</button></span></div>
+  <footer>
+    <div class="wrap footer-inner"><span><strong>EDZ BARBER</strong> · Cambridge, UK</span><span>Private studio in
+        preparation · No walk-ins</span><a href="https://www.instagram.com/edzbarber/" target="_blank"
+        rel="noopener noreferrer">Instagram ↗</a><a href="https://wa.me/447387771879" target="_blank"
+        rel="noopener noreferrer">WhatsApp ↗</a></div>
+    <div class="wrap footer-note">This website does not use advertising or analytics cookies. Third-party platforms
+      linked from this website have their own privacy policies.</div>
   </footer>
-  <div aria-label="Quick directions on mobile" class="mobile-bar">
-    <div class="mobile-offer"><strong>£17 haircut</strong><span>Standard price · Walk-ins welcome</span></div><a
-      class="button button-primary direction-link"
-      href="https://www.google.com/maps/dir/?api=1&amp;destination=47-51%20Norfolk%20Street%2C%20Cambridge%20CB1%202LD"
-      rel="noopener noreferrer" target="_blank"><svg aria-hidden="true" fill="none" stroke="currentColor"
-        stroke-width="2" viewbox="0 0 24 24">
-        <path d="m3 11 18-8-8 18-2-8-8-2Z"></path>
-      </svg>Directions</a>
+  <div class="mobile-contact">
+    <div><strong>EDZ Barber · £17</strong><small>Enquiries welcome</small></div><a class="btn btn-lime"
+      href="https://wa.me/447387771879?text=Hi%20Eduardo%2C%20I%27d%20like%20to%20enquire%20about%20EDZ%20Barber%20appointments."
+      target="_blank" rel="noopener noreferrer">WhatsApp ↗</a>
   </div>
-  <!-- Consent is optional for analytics and advertising; necessary preference storage is always on. -->
-  <section aria-label="Cookie consent" class="cookie-banner" hidden="" id="cookie-banner">
-    <div class="cookie-copy">
-      <p class="cookie-kicker">Your privacy matters</p>
-      <h2>Cookies &amp; privacy</h2>
-      <p>We store your choice so you don't have to choose again. Optional analytics and advertising cookies will only be
-        allowed if you agree. You can change this any time.</p>
-    </div>
-    <div class="cookie-actions">
-      <button class="cookie-btn" id="cookie-reject" type="button">Reject optional</button>
-      <button class="cookie-btn" id="cookie-manage" type="button">Preferences</button>
-      <button class="cookie-btn cookie-btn-primary" id="cookie-accept" type="button">Accept all</button>
-    </div>
-  </section>
-  <div class="cookie-overlay" hidden="" id="cookie-overlay">
-    <div aria-describedby="cookie-dialog-description" aria-labelledby="cookie-dialog-title" aria-modal="true"
-      class="cookie-dialog" id="cookie-dialog" role="dialog" tabindex="-1">
-      <div class="cookie-dialog-head">
-        <div>
-          <p class="cookie-kicker" style="color:#697d34">EDZ Barber</p>
-          <h2 id="cookie-dialog-title">Privacy preferences</h2>
-        </div>
-        <button aria-label="Close cookie preferences" class="cookie-close" id="cookie-close" type="button">×</button>
-      </div>
-      <div class="cookie-dialog-body">
-        <p id="cookie-dialog-description">Choose what to allow. Optional tracking is off unless you opt in. Your choices
-          are stored in this browser for up to 180 days.</p>
-        <label class="cookie-option"><span><strong>Strictly necessary</strong><small>Remember your privacy choice and
-              keep the site working. Always active.</small></span><input
-            aria-label="Strictly necessary storage always on" checked="" disabled="" type="checkbox" /></label>
-        <label class="cookie-option"><span><strong>Analytics</strong><small>Allow measuring page use and Get Directions
-              button clicks, if analytics tracking is connected.</small></span><input id="cookie-analytics"
-            type="checkbox" /></label>
-        <label class="cookie-option"><span><strong>Advertising</strong><small>Allow ad measurement and remarketing
-              cookies, if advertising tags are connected.</small></span><input id="cookie-marketing"
-            type="checkbox" /></label>
-        <p class="cookie-policy-note">This website uses a Google advertising tag with consent choices. Optional
-          analytics and advertising storage are denied by default until you opt in. Google Maps and Fresha open
-          third-party websites with their own privacy practices.</p>
-      </div>
-      <div class="cookie-dialog-actions">
-        <button class="cookie-btn" id="cookie-dialog-reject" type="button">Reject optional</button>
-        <button class="cookie-btn" id="cookie-save" type="button">Save choices</button>
-        <button class="cookie-btn cookie-btn-primary" id="cookie-dialog-accept" type="button">Accept all</button>
-      </div>
-    </div>
-  </div>
-  <script>
-    // OPTIONAL photo gallery. It only appears after you upload real photos to assets/.
-    (function () {
-      var photos = [
-        { src: 'assets/cut-1.jpg', title: 'EDZ Barber haircut' },
-        { src: 'assets/cut-2.jpg', title: 'EDZ Barber fade' },
-        { src: 'assets/cut-3.jpg', title: 'EDZ Barber finished cut' }
-      ];
-      var grid = document.getElementById('photo-grid');
-      var section = document.getElementById('real-cuts');
-      photos.forEach(function (photo) {
-        var img = new Image();
-        img.onload = function () {
-          var figure = document.createElement('figure');
-          img.alt = photo.title;
-          img.loading = 'lazy';
-          var caption = document.createElement('figcaption');
-          caption.textContent = photo.title;
-          figure.appendChild(img);
-          figure.appendChild(caption);
-          grid.appendChild(figure);
-          section.hidden = false;
-        };
-        img.src = photo.src;
-      });
-    }());
-    // Consent-aware click events; these do not prove a completed booking or visit.
-    function trackEDZClick(eventName, label) {
-      if (window.EDZCookieConsent && window.EDZCookieConsent.analyticsAllowed() && typeof window.gtag === 'function') {
-        window.gtag('event', eventName, { event_category: 'website_click', event_label: label });
-      }
-    }
-    document.querySelectorAll('.direction-link').forEach(function (link) {
-      link.addEventListener('click', function () { trackEDZClick('get_directions_click', 'Novo Studios, Norfolk Street'); });
-    });
-    document.querySelectorAll('a[href*="fresha.com/"]').forEach(function (link) {
-      link.addEventListener('click', function () { trackEDZClick('fresha_booking_click', 'Fresha profile'); });
-    });
-
-    // Cookie controls. No optional tags are loaded by this template.
-    (function () {
-      'use strict';
-      var consent = window.EDZCookieConsent;
-      var banner = document.getElementById('cookie-banner');
-      var overlay = document.getElementById('cookie-overlay');
-      var dialog = document.getElementById('cookie-dialog');
-      var analyticsInput = document.getElementById('cookie-analytics');
-      var marketingInput = document.getElementById('cookie-marketing');
-      var previousFocus = null;
-
-      function refreshBanner() {
-        var show = !consent.get();
-        banner.hidden = !show;
-        document.body.classList.toggle('cookie-notice-open', show && overlay.hidden);
-      }
-      function closePreferences() {
-        overlay.hidden = true;
-        document.body.style.overflow = '';
-        refreshBanner();
-        if (previousFocus && typeof previousFocus.focus === 'function') previousFocus.focus();
-      }
-      function openPreferences() {
-        previousFocus = document.activeElement;
-        var current = consent.get() || { analytics: false, marketing: false };
-        analyticsInput.checked = Boolean(current.analytics);
-        marketingInput.checked = Boolean(current.marketing);
-        banner.hidden = true;
-        document.body.classList.remove('cookie-notice-open');
-        overlay.hidden = false;
-        document.body.style.overflow = 'hidden';
-        document.getElementById('cookie-close').focus();
-      }
-      function choose(analytics, marketing) {
-        consent.save({ analytics: analytics, marketing: marketing });
-        closePreferences();
-      }
-      document.getElementById('cookie-accept').addEventListener('click', function () { choose(true, true); });
-      document.getElementById('cookie-reject').addEventListener('click', function () { choose(false, false); });
-      document.getElementById('cookie-manage').addEventListener('click', openPreferences);
-      document.getElementById('cookie-settings-footer').addEventListener('click', openPreferences);
-      document.getElementById('cookie-close').addEventListener('click', closePreferences);
-      document.getElementById('cookie-dialog-accept').addEventListener('click', function () { choose(true, true); });
-      document.getElementById('cookie-dialog-reject').addEventListener('click', function () { choose(false, false); });
-      document.getElementById('cookie-save').addEventListener('click', function () {
-        choose(analyticsInput.checked, marketingInput.checked);
-      });
-      overlay.addEventListener('click', function (event) {
-        if (event.target === overlay) closePreferences();
-      });
-      document.addEventListener('keydown', function (event) {
-        if (overlay.hidden) return;
-        if (event.key === 'Escape') { closePreferences(); return; }
-        if (event.key !== 'Tab') return;
-        var focusable = Array.prototype.slice.call(dialog.querySelectorAll('button:not([disabled]), input:not([disabled])'));
-        if (!focusable.length) return;
-        var first = focusable[0];
-        var last = focusable[focusable.length - 1];
-        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
-      });
-      refreshBanner();
-    }());
-  </script>
 </body>
 
 </html>
