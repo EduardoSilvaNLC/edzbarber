@@ -27,7 +27,7 @@ button{cursor:pointer}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 
 
-/* Booking details: a fixed £17 haircut and a clearly identified venue. */
+/* Booking details: haircut £17, beard trim £7 and a clearly identified venue. */
 .venue-card{margin-top:19px;border:1px solid #dce5d3;border-radius:8px;background:#e9efdf;padding:13px 14px;display:flex;align-items:center;justify-content:space-between;gap:15px}
 .venue-heading{display:flex;gap:10px;align-items:center;min-width:0}
 .venue-pin{display:grid;place-items:center;width:34px;height:34px;flex-shrink:0;border-radius:7px;background:#dceabf;color:#395b32;font-weight:950;font-size:24px}
@@ -36,10 +36,8 @@ button{cursor:pointer}
 .venue-heading div>span{font-size:11px;color:#5e725d;line-height:1.55;margin-top:2px}
 .venue-directions{white-space:nowrap;font-size:11px;font-weight:900;color:#284e2e;border-bottom:1px solid #5a7955;padding-bottom:4px}
 .venue-directions:hover,.faq-directions:hover{color:#50743d}
-.fixed-service{border:1px solid #d5ddd0;border-radius:6px;background:#fff;display:flex;justify-content:space-between;align-items:center;gap:14px;padding:15px 17px;min-height:58px;font-size:15px;font-weight:800}
-.fixed-service strong{font-size:21px;line-height:1;color:#31502a;font-weight:1000}
 .faq-directions{color:#345c31;font-weight:850;text-decoration:underline;text-underline-offset:3px}
-@media(max-width:560px){.venue-card{padding:12px;gap:8px}.venue-heading{gap:8px}.venue-heading div>span{font-size:10px}.venue-heading strong{font-size:12px}.venue-directions{font-size:10px}.venue-pin{width:28px;height:30px;font-size:20px}.fixed-service{min-height:54px;padding:11px 13px}}
+@media(max-width:560px){.venue-card{padding:12px;gap:8px}.venue-heading{gap:8px}.venue-heading div>span{font-size:10px}.venue-heading strong{font-size:12px}.venue-directions{font-size:10px}.venue-pin{width:28px;height:30px;font-size:20px}}
 @media(max-width:370px){.venue-card{align-items:flex-start;flex-direction:column}.venue-directions{margin-left:37px}}
 
 /* Simple, prominent follow link — secondary to the booking form. */
@@ -51,3 +49,34 @@ button{cursor:pointer}
 .follow-instagram-copy small{font-size:11px;color:#647963;line-height:1.4}
 .follow-instagram-arrow{font-size:20px;font-weight:800;color:#385d3e}
 @media(max-width:560px){.follow-instagram{margin-top:16px;padding:12px;gap:10px}.follow-instagram-icon{width:38px;height:38px}.follow-instagram-copy strong{font-size:11px}.follow-instagram-copy small{font-size:10px}}
+
+/* Two simple service choices; no dropdown. Checked choice is included in booking email. */
+.service-options{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.service-option{position:relative;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:64px;padding:14px 16px;background:#fff;border:1px solid #d5ddd0;border-radius:7px;cursor:pointer;transition:border-color .18s,background .18s,box-shadow .18s}
+/* The checkbox stays keyboard-accessible; the tile acts as its visible label. */
+.service-option input[type="checkbox"]{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;margin:0;padding:0;min-height:0}
+.service-option:has(input:checked){background:#e8f0d8;border-color:#87a465;box-shadow:inset 0 0 0 1px #87a465}
+.service-option:focus-within{outline:3px solid #5d83e0;outline-offset:3px}
+.service-option-title{font-size:14px;font-weight:850;color:#203325}
+.service-option strong{color:#31502a;font-size:21px;font-weight:1000;white-space:nowrap}
+@media(max-width:560px){.service-options{gap:8px}.service-option{padding:11px;min-height:56px;gap:6px}.service-option-title{font-size:12px}.service-option strong{font-size:18px}}
+@media(max-width:350px){.service-options{grid-template-columns:1fr}}
+
+/* Multiple services can be added to the same booking. */
+.service-selector .service-hint{font-size:12px;line-height:1.5;color:#718070;margin:0 0 11px}
+.service-option{padding-right:12px}
+.service-option-body{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}
+.service-option-subtitle{font-size:10px;color:#6d7d6d;line-height:1.3}
+.service-toggle{width:19px;height:19px;flex-shrink:0;border:1.5px solid #b1c3a8;border-radius:5px;display:grid;place-items:center;color:#213c29;font-size:15px;font-weight:900;background:#fff}
+.service-toggle:before{content:"+";line-height:1}
+.service-option:has(input:checked) .service-toggle{border-color:#587b42;background:#d2e9ac}
+.service-option:has(input:checked) .service-toggle:before{content:"✓"}
+.service-summary{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:12px;padding:13px 14px;background:#edf2e7;border:1px solid #d7e2cc;border-radius:7px}
+.service-summary-detail,.service-summary-price{display:flex;flex-direction:column;gap:4px}
+.service-summary-detail>span,.service-summary-price>span{font-size:9px;font-weight:950;letter-spacing:.11em;color:#748875}
+.service-summary-detail strong{font-size:12px;color:#2c3d2f;line-height:1.45}
+.service-summary-price{text-align:right;flex-shrink:0}
+.service-summary-price strong{font-size:24px;font-weight:1000;color:#213c25}
+.service-error{color:#a23022;font-size:12px;font-weight:750;margin:9px 0 0}
+.service-error[hidden]{display:none}
+@media(max-width:560px){.service-option{gap:5px;padding:11px 9px}.service-option-subtitle{font-size:9px}.service-toggle{width:16px;height:16px;font-size:12px}.service-summary-detail strong{font-size:11px}.service-summary-price strong{font-size:21px}}

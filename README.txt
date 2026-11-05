@@ -2,7 +2,7 @@ EDZ BARBER — SITE FEITO ESPECIALMENTE PARA RESERVAS
 
 OBJECTIVO
 - A homepage (https://www.edzbarber.co.uk/) abre directamente com o formulário de pedido de reserva.
-- O formulário mostra Haircut — £17 (sem dropdown) e pede data, hora, nome, email e TELEFONE obrigatório (nota opcional).
+- O formulário permite ADICIONAR Haircut — £17 e/ou Beard Trim — £7 (dois cartões, sem dropdown) e pede data, hora, nome, email e TELEFONE obrigatório (nota opcional).
 - O cliente NÃO recebe uma reserva confirmada automaticamente; você confirma por email.
 - O formulário envia ao Web3Forms com a chave pública que você criou na conversa.
 - O Web3Forms deve estar configurado na sua conta para enviar a edzbarber.bookings@gmail.com.
@@ -30,7 +30,7 @@ PUBLICAR NO GITHUB / VERCEL
 INFORMAÇÕES IMPORTANTES
 - Datas/horários selecionados são PREFERÊNCIAS, não representam horários realmente livres.
 - O cliente só fica confirmado após você responder pessoalmente por email.
-- Todos os cortes: £17. Único serviço fixo no formulário: Haircut — £17.
+- Todos os cortes: £17. Serviço de barba: Beard Trim £7. O cliente pode escolher um ou ambos os serviços. O e-mail inclui o campo services e total_price.
 - Não há envio de resposta automática para o e-mail do cliente no plano gratuito do Web3Forms.
 - Não enviamos um teste real ao seu inbox durante a criação dos arquivos.
 - Confira se o texto da política de privacidade reflete suas práticas reais, inclusive prazo de retenção e local de atendimento.
@@ -44,3 +44,13 @@ LOCALIZAÇÃO
 
 ACTUALIZAÇÃO: telefone do cliente obrigatório no formulário; aparece nos emails enviados pelo Web3Forms.
 LINK INSTAGRAM: botão Follow @edzbarber no formulário, menu e rodapé.
+
+ACTUALIZAÇÃO: novo serviço Beard Trim — £7. Seleção por dois cartões em vez de dropdown, sem alterar o design geral.
+
+ACTUALIZAÇÃO: ADICIONAR SERVIÇOS
+- Haircut (£17) e Beard Trim (£7) são checkboxes independentes (escolher um ou ambos).
+- Resumo e total actualizados imediatamente: Haircut + Beard Trim = £24.
+- Antes do envio, o JavaScript preenche os campos ocultos `services` e `total_price`; ambos seguem para o Web3Forms e aparecem na mensagem de reserva.
+- Se nenhum serviço estiver seleccionado, o envio é impedido e aparece um aviso.
+- O formulário continua sujeito a confirmação manual por email.
+- Este pacote foi testado com resposta simulada da API, não envio real para o seu Gmail.

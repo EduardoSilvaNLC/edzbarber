@@ -4,7 +4,31 @@
   const status = document.getElementById('booking-status');
   const submit = document.getElementById('submit-booking');
   const date = document.getElementById('booking-date');
-  if (!form || !status || !submit || !date) return;
+  const serviceChecks = Array.from(document.querySelectorAll('.service-checkbox'));
+  const selectedServices = document.getElementById('selected-services');
+  const selectedTotal = document.getElementById('selected-total');
+  const serviceNames = document.getElementById('service-summary-name');
+  const serviceTotal = document.getElementById('service-summary-total');
+  const servicesError = document.getElementById('services-error');
+  if (!form || !status || !submit || !date || !selectedServices || !selectedTotal || !serviceChecks.length) return;
+
+  function updateServices() {
+    const chosen = serviceChecks.filter(box => box.checked);
+    const total = chosen.reduce((sum, box) => sum + Number(box.dataset.price || 0), 0);
+    const serviceDescriptions = chosen.map(box => box.value);
+    // These named fields are delivered to the booking email by Web3Forms.
+    selectedServices.value = serviceDescriptions.join(' + ');
+    selectedTotal.value = `£${total}`;
+    serviceNames.textContent = chosen.map(box => box.value.split(' — ')[0]).join(' + ') || 'No service selected';
+    serviceTotal.textContent = `£${total}`;
+    if (chosen.length) {
+      servicesError.hidden = true;
+      serviceChecks.forEach(box => box.removeAttribute('aria-invalid'));
+    }
+    return chosen;
+  }
+  serviceChecks.forEach(box => box.addEventListener('change', updateServices));
+  updateServices();
 
   const localUKDate = () => {
     // Use the appointment location's date even for visitors travelling or using other time zones.
@@ -25,11 +49,16 @@
     setMinDate();
     if (date.value && date.value < date.min) date.setCustomValidity('Choose today or a future date.');
     else date.setCustomValidity('');
+    const chosenServices = updateServices();
+    if (!chosenServices.length) {
+      servicesError.hidden = false;
+      serviceChecks.forEach(box => box.setAttribute('aria-invalid', 'true'));
+      serviceChecks[0].focus();
+      return;
+    }
     if (!form.reportValidity()) return;
+    form.elements.subject.value = `EDZ Barber | Booking request: ${serviceNames.textContent} (${selectedTotal.value})`;
 
-    const email = document.getElementById('booking-email').value.trim();
-    const dateText = date.value;
-    const timeText = document.getElementById('booking-time').value;
     submit.disabled = true;
     submit.textContent = 'Sending your request…';
     status.hidden = true;
@@ -54,6 +83,7 @@
         submit.disabled = false;
         submit.innerHTML = originalContent;
         setMinDate();
+        updateServices();
         form.querySelector('#booking-date').focus();
       });
       status.hidden = false;
