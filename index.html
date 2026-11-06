@@ -13,6 +13,25 @@
     gtag('js', new Date());
   </script>
   <script src="consent.js" defer></script>
+  <!-- Meta Pixel Code -->
+  <script>
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () {
+        n.callMethod ?
+        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+      n.queue = []; t = b.createElement(e); t.async = !0;
+      t.src = v; s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '798969568366237');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=798969568366237&ev=PageView&noscript=1" /></noscript>
+  <!-- End Meta Pixel Code -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#101714">
@@ -274,13 +293,15 @@
         STUDIOS · 47–51 NORFOLK STREET, CAMBRIDGE</span></div>
     <div class="container footer-bottom"><span>© <span id="copyright-year">2026</span> EDZ BARBER</span>
       <div><a href="mailto:edzbarber.bookings@gmail.com">EMAIL</a><a href="https://www.instagram.com/edzbarber/"
-          target="_blank" rel="noopener noreferrer">FOLLOW @EDZBARBER ↗</a><a href="privacy.html">PRIVACY</a><button type="button" class="cookie-settings" data-open-cookie-preferences>COOKIE SETTINGS</button></div>
+          target="_blank" rel="noopener noreferrer">FOLLOW @EDZBARBER ↗</a><a href="privacy.html">PRIVACY</a><button
+          type="button" class="cookie-settings" data-open-cookie-preferences>COOKIE SETTINGS</button></div>
     </div>
   </footer>
   <!-- Optional Google Ads tracking is off until a visitor consents. -->
   <aside class="cookie-banner" id="cookie-banner" role="region" aria-label="Cookie preferences" hidden>
     <div class="cookie-banner-copy"><strong>Your privacy matters</strong>
-      <p>We use optional Google Ads cookies to measure booking requests from ads. You can say no and still book normally. <a href="privacy.html">Privacy notice</a></p>
+      <p>We use optional Google Ads cookies to measure booking requests from ads. You can say no and still book
+        normally. <a href="privacy.html">Privacy notice</a></p>
     </div>
     <div class="cookie-banner-actions">
       <button class="cookie-choice" type="button" id="reject-tracking">Reject optional</button>
