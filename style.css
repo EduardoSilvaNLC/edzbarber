@@ -80,3 +80,17 @@ button{cursor:pointer}
 .service-error{color:#a23022;font-size:12px;font-weight:750;margin:9px 0 0}
 .service-error[hidden]{display:none}
 @media(max-width:560px){.service-option{gap:5px;padding:11px 9px}.service-option-subtitle{font-size:9px}.service-toggle{width:16px;height:16px;font-size:12px}.service-summary-detail strong{font-size:11px}.service-summary-price strong{font-size:21px}}
+
+/* Google Ads consent notice: optional, equally prominent accept and reject choices. */
+.cookie-banner[hidden]{display:none!important}
+.cookie-banner{position:fixed;z-index:1000;bottom:16px;left:50%;transform:translateX(-50%);width:min(720px,calc(100% - 24px));display:flex;align-items:center;gap:20px;justify-content:space-between;background:#fff;color:#18251c;border:1px solid #cbd9c1;border-radius:11px;padding:16px 18px;box-shadow:0 12px 40px #0004}
+.cookie-banner-copy{max-width:400px}
+.cookie-banner-copy strong{font-weight:900;font-size:14px}
+.cookie-banner-copy p{font-size:12px;line-height:1.55;color:#536355;margin:4px 0 0}
+.cookie-banner-copy a{text-decoration:underline;text-underline-offset:2px}
+.cookie-banner-actions{display:flex;gap:8px;flex-shrink:0}
+.cookie-choice{border-radius:5px;border:1px solid #31452e;background:#eef3e7;color:#203121;padding:12px 10px;font-size:12px;font-weight:850;min-width:110px;min-height:44px}
+.cookie-choice:hover{background:#dcebbf}
+.cookie-settings{font-size:inherit;letter-spacing:inherit;font-weight:inherit;color:inherit;text-decoration:underline;text-underline-offset:3px;background:none;border:0;padding:0}
+.cookie-settings-inline{font-size:inherit;font-weight:inherit;color:#37592e;letter-spacing:normal}
+@media(max-width:720px){.cookie-banner{flex-direction:column;align-items:stretch;gap:12px;padding:14px;bottom:8px}.cookie-banner-copy{max-width:none}.cookie-banner-actions{width:100%}.cookie-choice{flex:1;min-width:0}}

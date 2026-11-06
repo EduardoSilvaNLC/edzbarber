@@ -2,15 +2,17 @@
 <html lang="en-GB">
 
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18502199382"></script>
+  <!-- Google Ads consent mode (basic): the Google library loads only after opt-in. -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+      ad_storage: 'denied', analytics_storage: 'denied',
+      ad_user_data: 'denied', ad_personalization: 'denied'
+    });
     gtag('js', new Date());
-
-    gtag('config', 'AW-18502199382');
   </script>
+  <script src="consent.js" defer></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#101714">
@@ -272,9 +274,19 @@
         STUDIOS · 47–51 NORFOLK STREET, CAMBRIDGE</span></div>
     <div class="container footer-bottom"><span>© <span id="copyright-year">2026</span> EDZ BARBER</span>
       <div><a href="mailto:edzbarber.bookings@gmail.com">EMAIL</a><a href="https://www.instagram.com/edzbarber/"
-          target="_blank" rel="noopener noreferrer">FOLLOW @EDZBARBER ↗</a><a href="privacy.html">PRIVACY</a></div>
+          target="_blank" rel="noopener noreferrer">FOLLOW @EDZBARBER ↗</a><a href="privacy.html">PRIVACY</a><button type="button" class="cookie-settings" data-open-cookie-preferences>COOKIE SETTINGS</button></div>
     </div>
   </footer>
+  <!-- Optional Google Ads tracking is off until a visitor consents. -->
+  <aside class="cookie-banner" id="cookie-banner" role="region" aria-label="Cookie preferences" hidden>
+    <div class="cookie-banner-copy"><strong>Your privacy matters</strong>
+      <p>We use optional Google Ads cookies to measure booking requests from ads. You can say no and still book normally. <a href="privacy.html">Privacy notice</a></p>
+    </div>
+    <div class="cookie-banner-actions">
+      <button class="cookie-choice" type="button" id="reject-tracking">Reject optional</button>
+      <button class="cookie-choice" type="button" id="accept-tracking">Accept optional</button>
+    </div>
+  </aside>
 </body>
 
 </html>

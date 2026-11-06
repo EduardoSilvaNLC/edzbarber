@@ -1,6 +1,16 @@
 <!doctype html>
 <html lang="en-GB">
 <head>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+      ad_storage: 'denied', analytics_storage: 'denied',
+      ad_user_data: 'denied', ad_personalization: 'denied'
+    });
+    gtag('js', new Date());
+  </script>
+  <script src="consent.js" defer></script>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#101714"><meta name="description" content="How EDZ Barber uses personal information sent through the appointment request form.">
   <link rel="canonical" href="https://www.edzbarber.co.uk/privacy.html"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css">
@@ -10,7 +20,7 @@
   <header class="header"><div class="container nav"><a class="logo" href="./" aria-label="EDZ Barber home"><span class="logo-symbol">EDZ<span class="logo-dot">.</span></span><span class="logo-word">BARBER</span></a><a class="nav-book" href="./#book">REQUEST AN APPOINTMENT ↗</a></div></header>
   <main class="container privacy-main">
     <span class="section-tag">EDZ BARBER / PRIVACY</span><h1>Privacy notice.</h1>
-    <p><strong>Last updated:</strong> 5 November 2026.</p>
+    <p><strong>Last updated:</strong> 6 November 2026.</p>
     <p>EDZ Barber is an independent barbering service based inside Novo Studios, 47–51 Norfolk Street, Cambridge CB1 2LD. Contact <a href="mailto:edzbarber.bookings@gmail.com">edzbarber.bookings@gmail.com</a> with any questions about your information.</p>
     <h2>What we collect</h2><p>When you use our booking request form, we collect your name, email address, phone number, selected service, preferred date and time, and any additional notes you choose to share. Please do not include sensitive personal details in the notes.</p>
     <h2>What we use it for</h2><p>We use your information to answer your enquiry, check possible appointments and arrange the barbering service you request. We may use your phone number to contact you about your booking. We do not automatically add you to a marketing mailing list.</p>
@@ -18,8 +28,11 @@
     <h2>Service providers</h2><p>Our form uses Web3Forms to deliver requests to a Google Gmail inbox. These services process your information to transmit and store messages. You can read <a href="https://web3forms.com/privacy" target="_blank" rel="noopener noreferrer">Web3Forms' privacy notice</a> and <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's privacy policy</a>. Some data processing may take place outside the UK, subject to relevant transfer safeguards.</p>
     <h2>Storage and retention</h2><p>We keep booking correspondence only as long as reasonably needed to manage enquiries and appointments or meet legal and accounting obligations. We delete messages we no longer need.</p>
     <h2>Your rights</h2><p>You can email us to request access to, correction of or deletion of your data, subject to any applicable exceptions. You can also contact the UK's <a href="https://ico.org.uk/make-a-complaint/" target="_blank" rel="noopener noreferrer">Information Commissioner's Office</a>.</p>
-    <h2>Cookies</h2><p>We do not intentionally use advertising or analytics cookies on these pages. External websites you visit may have separate privacy and cookie practices.</p>
+    <h2>Google Ads and optional cookies</h2><p>With your permission, we use the Google Ads tag to measure whether our advertisements lead to successful booking requests. Google may set cookies or process device and advertising-click information for this purpose. No name, email address, telephone number or booking notes are sent as part of the conversion event. We do not load the Google Ads tag before you consent, and the booking form works even if you decline. Your optional choice is saved in your browser, and you can change it at any time using <button type="button" class="cookie-settings cookie-settings-inline" data-open-cookie-preferences>Cookie settings</button>. If you withdraw consent, we stop loading the tag on future page views. External sites you visit have their own privacy policies.</p>
     <a class="back-link" href="./#book">← Back to booking</a>
   </main>
   <footer class="footer"><div class="container footer-top"><a class="footer-brand" href="./">EDZ<span>.</span> BARBER</a><span>CAMBRIDGE, UK</span></div></footer>
-</body></html>
+<aside class="cookie-banner" id="cookie-banner" role="region" aria-label="Cookie preferences" hidden>
+  <div class="cookie-banner-copy"><strong>Your privacy matters</strong><p>We use optional Google Ads cookies to measure booking requests from ads. You can say no and still book normally. <a href="privacy.html">Privacy notice</a></p></div>
+  <div class="cookie-banner-actions"><button class="cookie-choice" type="button" id="reject-tracking">Reject optional</button><button class="cookie-choice" type="button" id="accept-tracking">Accept optional</button></div>
+</aside></body></html>
