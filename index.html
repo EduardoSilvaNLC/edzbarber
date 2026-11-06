@@ -1,13 +1,25 @@
 <!doctype html>
 <html lang="en-GB">
+
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18502199382"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'AW-18502199382');
+  </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#101714">
-  <meta name="description" content="Haircuts £17 and beard trims £7 at EDZ Barber, based inside Novo Studios, 47–51 Norfolk Street, Cambridge CB1 2LD. Request an appointment online; confirmation by email.">
+  <meta name="description"
+    content="Haircuts £17 and beard trims £7 at EDZ Barber, based inside Novo Studios, 47–51 Norfolk Street, Cambridge CB1 2LD. Request an appointment online; confirmation by email.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Book a Haircut or Beard Trim in Cambridge | EDZ Barber">
-  <meta property="og:description" content="Haircuts £17 and beard trims £7 at EDZ Barber, inside Novo Studios, 47–51 Norfolk Street, Cambridge. Request your preferred time online.">
+  <meta property="og:description"
+    content="Haircuts £17 and beard trims £7 at EDZ Barber, inside Novo Studios, 47–51 Norfolk Street, Cambridge. Request your preferred time online.">
   <meta property="og:url" content="https://www.edzbarber.co.uk/">
   <link rel="canonical" href="https://www.edzbarber.co.uk/">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -15,6 +27,7 @@
   <script src="booking.js" defer></script>
   <title>Haircuts £17 · Beard Trims £7 | EDZ Barber Cambridge</title>
 </head>
+
 <body>
   <a class="skip-link" href="#book">Skip to appointment request</a>
   <header class="header">
@@ -26,7 +39,8 @@
       <div class="nav-location"><span class="location-dot" aria-hidden="true"></span> NOVO STUDIOS · CAMBRIDGE</div>
       <nav class="nav-actions" aria-label="Main navigation">
         <a href="#how-it-works" class="nav-text">How it works</a>
-        <a href="https://www.instagram.com/edzbarber/" target="_blank" rel="noopener noreferrer" class="nav-text">Follow @edzbarber <span aria-hidden="true">↗</span></a>
+        <a href="https://www.instagram.com/edzbarber/" target="_blank" rel="noopener noreferrer" class="nav-text">Follow
+          @edzbarber <span aria-hidden="true">↗</span></a>
         <a class="nav-book" href="#book">REQUEST A CUT <span aria-hidden="true">↗</span></a>
       </nav>
     </div>
@@ -37,8 +51,11 @@
       <div class="container hero-grid">
         <div class="hero-story">
           <div class="eyebrow"><span class="asterisk" aria-hidden="true">✳</span> EDZ BARBER / CAMBRIDGE</div>
-          <h1 id="hero-title">YOUR<br>NEXT CUT.<br><span class="accent-line">SORTED<span class="period">.</span></span></h1>
-          <p class="hero-description">Haircuts £17 and beard trims £7 at EDZ Barber, based inside <strong>Novo Studios</strong> in Cambridge. Add the services you want, choose a time and I'll reply personally to confirm.</p>
+          <h1 id="hero-title">YOUR<br>NEXT CUT.<br><span class="accent-line">SORTED<span class="period">.</span></span>
+          </h1>
+          <p class="hero-description">Haircuts £17 and beard trims £7 at EDZ Barber, based inside <strong>Novo
+              Studios</strong> in Cambridge. Add the services you want, choose a time and I'll reply personally to
+            confirm.</p>
           <div class="story-badges" aria-label="Booking benefits">
             <span><span aria-hidden="true">✓</span> NO ACCOUNT</span>
             <span><span aria-hidden="true">✓</span> EASY REQUEST</span>
@@ -55,10 +72,15 @@
           </div>
           <div class="form-intro">
             <h2 id="booking-title">Let's get you<br><em>booked in.</em></h2>
-            <p>Haircut £17 · Beard Trim £7. Add one or both services, choose a date and time, and I'll confirm by email.</p>
+            <p>Haircut £17 · Beard Trim £7. Add one or both services, choose a date and time, and I'll confirm by email.
+            </p>
             <div class="venue-card">
-              <div class="venue-heading"><span class="venue-pin" aria-hidden="true">⌖</span><div><strong>Inside Novo Studios</strong><span>47–51 Norfolk Street, Cambridge CB1 2LD</span></div></div>
-              <a class="venue-directions" href="https://www.google.com/maps/dir/?api=1&amp;destination=Novo%20Studios%2C%2047-51%20Norfolk%20Street%2C%20Cambridge%20CB1%202LD%2C%20UK" target="_blank" rel="noopener noreferrer">Get directions <span aria-hidden="true">↗</span></a>
+              <div class="venue-heading"><span class="venue-pin" aria-hidden="true">⌖</span>
+                <div><strong>Inside Novo Studios</strong><span>47–51 Norfolk Street, Cambridge CB1 2LD</span></div>
+              </div>
+              <a class="venue-directions"
+                href="https://www.google.com/maps/dir/?api=1&amp;destination=Novo%20Studios%2C%2047-51%20Norfolk%20Street%2C%20Cambridge%20CB1%202LD%2C%20UK"
+                target="_blank" rel="noopener noreferrer">Get directions <span aria-hidden="true">↗</span></a>
             </div>
           </div>
           <form action="https://api.web3forms.com/submit" method="POST" id="booking-request-form">
@@ -69,27 +91,34 @@
             <input type="hidden" name="total_price" id="selected-total" value="£17">
             <input type="checkbox" name="botcheck" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
 
-            <fieldset class="input-group service-selector" id="services-group" aria-describedby="services-help services-error">
+            <fieldset class="input-group service-selector" id="services-group"
+              aria-describedby="services-help services-error">
               <legend>01 <span>Add your services</span></legend>
               <p class="service-hint" id="services-help">Select one or both. Tap a service to add or remove it.</p>
               <div class="service-options" role="group" aria-label="Choose one or more services">
                 <label class="service-option">
-                  <input id="service-haircut" class="service-checkbox" type="checkbox" value="Haircut — £17" data-price="17" checked>
-                  <span class="service-option-body"><span class="service-option-title">Haircut</span><span class="service-option-subtitle">All haircut styles</span></span>
+                  <input id="service-haircut" class="service-checkbox" type="checkbox" value="Haircut — £17"
+                    data-price="17" checked>
+                  <span class="service-option-body"><span class="service-option-title">Haircut</span><span
+                      class="service-option-subtitle">All haircut styles</span></span>
                   <strong>£17</strong>
                   <span class="service-toggle" aria-hidden="true"></span>
                 </label>
                 <label class="service-option">
-                  <input id="service-beard" class="service-checkbox" type="checkbox" value="Beard Trim — £7" data-price="7">
-                  <span class="service-option-body"><span class="service-option-title">Beard Trim</span><span class="service-option-subtitle">Add a beard trim</span></span>
+                  <input id="service-beard" class="service-checkbox" type="checkbox" value="Beard Trim — £7"
+                    data-price="7">
+                  <span class="service-option-body"><span class="service-option-title">Beard Trim</span><span
+                      class="service-option-subtitle">Add a beard trim</span></span>
                   <strong>£7</strong>
                   <span class="service-toggle" aria-hidden="true"></span>
                 </label>
               </div>
               <p class="service-error" id="services-error" role="alert" hidden>Please choose at least one service.</p>
               <div class="service-summary" aria-live="polite" aria-atomic="true">
-                <div class="service-summary-detail"><span>YOUR BOOKING</span><strong id="service-summary-name">Haircut</strong></div>
-                <div class="service-summary-price"><span>TOTAL</span><strong id="service-summary-total">£17</strong></div>
+                <div class="service-summary-detail"><span>YOUR BOOKING</span><strong
+                    id="service-summary-name">Haircut</strong></div>
+                <div class="service-summary-price"><span>TOTAL</span><strong id="service-summary-total">£17</strong>
+                </div>
               </div>
             </fieldset>
 
@@ -112,15 +141,18 @@
               <legend>03 <span>Your details</span></legend>
               <div class="field">
                 <label class="sub-label" for="booking-name">Full name</label>
-                <input id="booking-name" name="name" type="text" autocomplete="name" maxlength="100" placeholder="Your name" required>
+                <input id="booking-name" name="name" type="text" autocomplete="name" maxlength="100"
+                  placeholder="Your name" required>
               </div>
               <div class="field">
                 <label class="sub-label" for="booking-email">Email address</label>
-                <input id="booking-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" placeholder="you@example.com" required>
+                <input id="booking-email" name="email" type="email" inputmode="email" autocomplete="email"
+                  maxlength="254" placeholder="you@example.com" required>
               </div>
               <div class="field">
                 <label class="sub-label" for="booking-phone">Phone number</label>
-                <input id="booking-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="25" placeholder="e.g. 07xxx xxx xxx" required>
+                <input id="booking-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="25"
+                  placeholder="e.g. 07xxx xxx xxx" required>
               </div>
             </fieldset>
 
@@ -128,51 +160,121 @@
               <summary>Add a note <span>(optional)</span></summary>
               <div class="field extra-field">
                 <label for="booking-note" class="visually-hidden">Additional information</label>
-                <textarea id="booking-note" name="message" maxlength="750" rows="3" placeholder="Any style details or another time that works?"></textarea>
+                <textarea id="booking-note" name="message" maxlength="750" rows="3"
+                  placeholder="Any style details or another time that works?"></textarea>
               </div>
             </details>
 
-            <button class="submit-button" id="submit-booking" type="submit"><span>Send booking request</span><span class="button-arrow" aria-hidden="true">↗</span></button>
-            <div class="submission-notice"><span class="notice-icon" aria-hidden="true">ⓘ</span><p><strong>Not an instant booking.</strong> Your appointment is confirmed only after I reply by email. By submitting, you agree that I can contact you about this request. <a href="privacy.html">Privacy notice</a>.</p></div>
+            <button class="submit-button" id="submit-booking" type="submit"><span>Send booking request</span><span
+                class="button-arrow" aria-hidden="true">↗</span></button>
+            <div class="submission-notice"><span class="notice-icon" aria-hidden="true">ⓘ</span>
+              <p><strong>Not an instant booking.</strong> Your appointment is confirmed only after I reply by email. By
+                submitting, you agree that I can contact you about this request. <a href="privacy.html">Privacy
+                  notice</a>.</p>
+            </div>
           </form>
           <div class="form-feedback" id="booking-status" role="status" aria-live="polite" hidden></div>
-          <a class="follow-instagram" href="https://www.instagram.com/edzbarber/" target="_blank" rel="noopener noreferrer" aria-label="Follow EDZ Barber on Instagram, opens a new tab">
+          <a class="follow-instagram" href="https://www.instagram.com/edzbarber/" target="_blank"
+            rel="noopener noreferrer" aria-label="Follow EDZ Barber on Instagram, opens a new tab">
             <span class="follow-instagram-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.8" y="2.8" width="18.4" height="18.4" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.7" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              <svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2.8" y="2.8" width="18.4" height="18.4" rx="5.5" />
+                <circle cx="12" cy="12" r="4.2" />
+                <circle cx="17.7" cy="6.5" r="1" fill="currentColor" stroke="none" />
+              </svg>
             </span>
-            <span class="follow-instagram-copy"><strong>Follow EDZ Barber on Instagram</strong><small>@edzbarber · See my latest haircuts</small></span>
+            <span class="follow-instagram-copy"><strong>Follow EDZ Barber on Instagram</strong><small>@edzbarber · See
+                my latest haircuts</small></span>
             <span class="follow-instagram-arrow" aria-hidden="true">↗</span>
           </a>
         </section>
       </div>
-      <div class="hero-bottom"><div class="container hero-bottom-inner"><span>MAKE IT A GOOD HAIR DAY</span><span>NOVO STUDIOS · CAMBRIDGE</span><span>EDZ BARBER / EST. WITH PASSION</span></div></div>
+      <div class="hero-bottom">
+        <div class="container hero-bottom-inner"><span>MAKE IT A GOOD HAIR DAY</span><span>NOVO STUDIOS ·
+            CAMBRIDGE</span><span>EDZ BARBER / EST. WITH PASSION</span></div>
+      </div>
     </section>
 
     <section class="how" id="how-it-works" aria-labelledby="how-title">
       <div class="container">
-        <div class="section-heading"><div><span class="section-tag">GOOD TO KNOW / 02</span><h2 id="how-title">Three steps.<br><span>That's it.</span></h2></div><p>Booking your barber appointment shouldn't be complicated. No signup, no back-and-forth through different apps.</p></div>
+        <div class="section-heading">
+          <div><span class="section-tag">GOOD TO KNOW / 02</span>
+            <h2 id="how-title">Three steps.<br><span>That's it.</span></h2>
+          </div>
+          <p>Booking your barber appointment shouldn't be complicated. No signup, no back-and-forth through different
+            apps.</p>
+        </div>
         <div class="steps-grid">
-          <article class="step-card"><span class="step-count">01</span><div class="step-icon" aria-hidden="true">◷</div><h3>Pick a time</h3><p>Add a haircut, a beard trim or both, then pick your preferred date and time.</p></article>
-          <article class="step-card"><span class="step-count">02</span><div class="step-icon" aria-hidden="true">✉</div><h3>I check my diary</h3><p>Your request arrives in my inbox. I'll check the availability.</p></article>
-          <article class="step-card"><span class="step-count">03</span><div class="step-icon" aria-hidden="true">✓</div><h3>Get your reply</h3><p>I'll email you to confirm the time or suggest another slot.</p></article>
+          <article class="step-card"><span class="step-count">01</span>
+            <div class="step-icon" aria-hidden="true">◷</div>
+            <h3>Pick a time</h3>
+            <p>Add a haircut, a beard trim or both, then pick your preferred date and time.</p>
+          </article>
+          <article class="step-card"><span class="step-count">02</span>
+            <div class="step-icon" aria-hidden="true">✉</div>
+            <h3>I check my diary</h3>
+            <p>Your request arrives in my inbox. I'll check the availability.</p>
+          </article>
+          <article class="step-card"><span class="step-count">03</span>
+            <div class="step-icon" aria-hidden="true">✓</div>
+            <h3>Get your reply</h3>
+            <p>I'll email you to confirm the time or suggest another slot.</p>
+          </article>
         </div>
       </div>
     </section>
 
     <section class="info" aria-labelledby="questions-title">
       <div class="container info-grid">
-        <div class="info-intro"><span class="section-tag">QUESTIONS / 03</span><h2 id="questions-title">Before<br>you book.</h2><a href="https://www.instagram.com/edzbarber/" target="_blank" rel="noopener noreferrer" class="instagram-link">FOLLOW @EDZBARBER ON INSTAGRAM <span aria-hidden="true">↗</span></a></div>
+        <div class="info-intro"><span class="section-tag">QUESTIONS / 03</span>
+          <h2 id="questions-title">Before<br>you book.</h2><a href="https://www.instagram.com/edzbarber/"
+            target="_blank" rel="noopener noreferrer" class="instagram-link">FOLLOW @EDZBARBER ON INSTAGRAM <span
+              aria-hidden="true">↗</span></a>
+        </div>
         <div class="faq-list">
-          <details><summary>Is my appointment confirmed instantly?</summary><p>No. Your form is an appointment request. I'll email you to confirm availability or suggest a different time.</p></details>
-          <details><summary>Do I need an account?</summary><p>No account needed. Just enter your name, email address, phone number and preferred appointment details.</p></details>
-          <details><summary>Where will my appointment take place?</summary><p>EDZ Barber is based inside <strong>Novo Studios</strong>, 47–51 Norfolk Street, Cambridge CB1 2LD. <a class="faq-directions" href="https://www.google.com/maps/dir/?api=1&amp;destination=Novo%20Studios%2C%2047-51%20Norfolk%20Street%2C%20Cambridge%20CB1%202LD%2C%20UK" target="_blank" rel="noopener noreferrer">Get directions ↗</a></p></details>
-          <details><summary>How much do services cost?</summary><p>Every haircut is £17, including skin fades and classic cuts. A beard trim costs £7. Select one or both services above. Haircut + beard trim costs £24 in total.</p></details>
+          <details>
+            <summary>Is my appointment confirmed instantly?</summary>
+            <p>No. Your form is an appointment request. I'll email you to confirm availability or suggest a different
+              time.</p>
+          </details>
+          <details>
+            <summary>Do I need an account?</summary>
+            <p>No account needed. Just enter your name, email address, phone number and preferred appointment details.
+            </p>
+          </details>
+          <details>
+            <summary>Where will my appointment take place?</summary>
+            <p>EDZ Barber is based inside <strong>Novo Studios</strong>, 47–51 Norfolk Street, Cambridge CB1 2LD. <a
+                class="faq-directions"
+                href="https://www.google.com/maps/dir/?api=1&amp;destination=Novo%20Studios%2C%2047-51%20Norfolk%20Street%2C%20Cambridge%20CB1%202LD%2C%20UK"
+                target="_blank" rel="noopener noreferrer">Get directions ↗</a></p>
+          </details>
+          <details>
+            <summary>How much do services cost?</summary>
+            <p>Every haircut is £17, including skin fades and classic cuts. A beard trim costs £7. Select one or both
+              services above. Haircut + beard trim costs £24 in total.</p>
+          </details>
         </div>
       </div>
     </section>
 
-    <section class="bottom-cta" aria-label="Final booking reminder"><div class="container bottom-cta-inner"><div><span>READY WHEN YOU ARE</span><h2>Next cut. <em>One request away.</em></h2></div><a href="#book" class="back-to-book">REQUEST AN APPOINTMENT <span aria-hidden="true">↗</span></a></div></section>
+    <section class="bottom-cta" aria-label="Final booking reminder">
+      <div class="container bottom-cta-inner">
+        <div><span>READY WHEN YOU ARE</span>
+          <h2>Next cut. <em>One request away.</em></h2>
+        </div><a href="#book" class="back-to-book">REQUEST AN APPOINTMENT <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
   </main>
-  <footer class="footer"><div class="container footer-top"><a class="footer-brand" href="/">EDZ<span>.</span> BARBER</a><span>INSIDE NOVO STUDIOS · 47–51 NORFOLK STREET, CAMBRIDGE</span></div><div class="container footer-bottom"><span>© <span id="copyright-year">2026</span> EDZ BARBER</span><div><a href="mailto:edzbarber.bookings@gmail.com">EMAIL</a><a href="https://www.instagram.com/edzbarber/" target="_blank" rel="noopener noreferrer">FOLLOW @EDZBARBER ↗</a><a href="privacy.html">PRIVACY</a></div></div></footer>
+  <footer class="footer">
+    <div class="container footer-top"><a class="footer-brand" href="/">EDZ<span>.</span> BARBER</a><span>INSIDE NOVO
+        STUDIOS · 47–51 NORFOLK STREET, CAMBRIDGE</span></div>
+    <div class="container footer-bottom"><span>© <span id="copyright-year">2026</span> EDZ BARBER</span>
+      <div><a href="mailto:edzbarber.bookings@gmail.com">EMAIL</a><a href="https://www.instagram.com/edzbarber/"
+          target="_blank" rel="noopener noreferrer">FOLLOW @EDZBARBER ↗</a><a href="privacy.html">PRIVACY</a></div>
+    </div>
+  </footer>
 </body>
+
 </html>
