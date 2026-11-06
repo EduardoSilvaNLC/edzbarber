@@ -1,32 +1,21 @@
-EDZ BARBER — Google Ads Booking Conversion (6 November 2026)
+EDZ BARBER – Meta Pixel + Google Ads booking conversion (6 Nov 2026)
 
-CONTENTS
-index.html, style.css, booking.js, consent.js, privacy.html, favicon.svg, booking/index.html
+Deploy all files together to the root of the website repository. Keep any existing booking/ folder and other assets already deployed.
 
-GOOGLE ADS SETUP
-- Google Ads tag ID: AW-18502199382
-- Booking lead conversion: AW-18502199382/_NF6CO7CpLMdENbQxPZE
-- The conversion is fired in booking.js ONLY after Web3Forms returns HTTP success with success: true.
-- Conversion does not fire for a click, a failed form, a page view or a rejected/unknown tracking consent.
-- The conversion does not send customer contact information or service data to Google Ads.
+WHAT CHANGED
+- Meta Pixel 1076609655424186 is loaded by consent.js ONLY after optional advertising consent.
+- The cookie banner and privacy page disclose BOTH Google Ads and Meta Pixel.
+- Consent is re-requested because previous Google-only consent cannot authorize Meta.
+- Meta PageView is a standard event sent after consent.
+- Meta Lead is sent only after a successful Web3Forms booking request, via the existing booking.js callback.
+- Existing Google Ads conversion ID and booking success logic are unchanged.
+- Layout and £17 standard pricing were left untouched. The £10 offer for Nov 7 needs its own clear landing-page promotion/terms before running ads.
 
-OPTIONAL TRACKING CONSENT
-- Google Ads (basic consent mode) is NOT loaded until a visitor accepts optional tracking.
-- The banner has equal 'Reject optional' and 'Accept optional' buttons.
-- A 'COOKIE SETTINGS' button in the footer and a 'Cookie settings' control in Privacy let users change preferences.
-- If a visitor rejects optional tracking, their appointment request can still be sent by Web3Forms but will not be tracked by Google Ads.
-- Google Tag Assistant may need you to accept optional tracking on the site before tag detection.
+TEST
+1. Deploy. Test in a fresh private browser. Before consent, neither Google nor Meta Pixel should send tracking.
+2. Reject optional -> no ad tracking, booking must still work.
+3. In another fresh private browser window, accept optional -> check PageView in Meta Events Manager Test Events.
+4. Send ONE successful test booking -> confirm exactly one Meta Lead and Google Ads booking conversion.
+5. Ensure failed submissions do not send a Lead. If Ads Manager cannot select this new dataset, check asset access/ownership.
 
-PUBLISHING
-1. Extract this ZIP and upload all files/folders into the root of your GitHub site repository.
-2. Let Vercel deploy, then open www.edzbarber.co.uk in a private browser window.
-3. Accept optional tracking for the Google Ads conversion tracking test.
-4. Send a test booking request and ensure an email arrives at edzbarber.bookings@gmail.com.
-5. Use Google Tag Assistant to check that the conversion fires exactly once on a successful form submission, not on a click or failed submission.
-6. In Google Ads, use 'EDZ - Booking Request' as the principal conversion for the new Search campaign.
-7. Do not activate your ad campaign until the conversion is verified and the billing alert is resolved.
-
-IMPORTANT
-- This zip does not publish to GitHub/Vercel automatically.
-- No live form email or Google Ads conversion was sent during this packaging process.
-- Cookie handling is a minimal opt-in implementation; review your business's privacy obligations and consent solution as needed.
+NOTE: The Meta Pixel may still need domain/asset verification, and the campaign requires a budget/schedule fix. We did not publish any live changes.

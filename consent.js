@@ -1,6 +1,8 @@
 (() => {
   'use strict';
-  const STORE_KEY = 'edz_google_ads_consent_v1';
+  // New consent version: prior Google-only consent is not reused for Meta.
+  const STORE_KEY = 'edz_ads_consent_google_meta_v2';
+  const META_PIXEL_ID = '1076609655424186';
   const TAG_ID = 'AW-18502199382';
   const BOOKING_CONVERSION = 'AW-18502199382/_NF6CO7CpLMdENbQxPZE';
   const banner = document.getElementById('cookie-banner');
@@ -8,6 +10,7 @@
   const reject = document.getElementById('reject-tracking');
   const manage = document.querySelectorAll('[data-open-cookie-preferences]');
   let tagLoaded = false;
+  let metaLoaded = false;
 
   const getSaved = () => {
     try { return localStorage.getItem(STORE_KEY); }
@@ -40,6 +43,33 @@
     document.head.appendChild(script);
   }
 
+  function loadMetaPixel() {
+    if (metaLoaded) return;
+    metaLoaded = true;
+    // Meta is intentionally loaded only after explicit marketing consent.
+    !function(f,b,e,v,n,t,s) {
+      if (f.fbq) return;
+      n = f.fbq = function() { n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments); };
+      if (!f._fbq) f._fbq = n;
+      n.push = n; n.loaded = true; n.version = '2.0'; n.queue = [];
+      t = b.createElement(e); t.async = true; t.src = v;
+      s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s);
+    }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+    window.fbq('init', META_PIXEL_ID);
+    window.fbq('track', 'PageView');
+  }
+
+  function deleteLocalMetaCookies() {
+    const names = document.cookie.split(';').map(c => c.split('=')[0].trim());
+    const hosts = ['', '; domain=' + location.hostname, '; domain=.edzbarber.co.uk'];
+    for (const name of names) {
+      if (!/^(_fbp$|_fbc$)/.test(name)) continue;
+      for (const host of hosts) {
+        document.cookie = name + '=; Max-Age=0; path=/; SameSite=Lax' + host;
+      }
+    }
+  }
+
   function deleteLocalGoogleCookies() {
     const names = document.cookie.split(';').map(c => c.split('=')[0].trim());
     const hosts = ['', '; domain=' + location.hostname, '; domain=.edzbarber.co.uk'];
@@ -57,6 +87,7 @@
   if (choice === 'accepted') {
     consentUpdate(true);
     loadTag();
+    loadMetaPixel();
   } else if (choice !== 'rejected') {
     showBanner();
   }
@@ -66,6 +97,7 @@
     saveChoice(choice);
     consentUpdate(true);
     loadTag();
+    loadMetaPixel();
     hideBanner();
   });
 
@@ -78,17 +110,22 @@
     if (wasAccepted) {
       // A reload removes the loaded tag from the document after consent withdrawal.
       deleteLocalGoogleCookies();
+      deleteLocalMetaCookies();
       location.reload();
     }
   });
   for (const button of manage) button.addEventListener('click', showBanner);
 
   window.edzTrackSuccessfulBooking = () => {
-    // No Google Ads event when consent was not granted, and no customer details sent.
-    if (choice !== 'accepted' || typeof window.gtag !== 'function') return;
-    window.gtag('event', 'conversion', {
-      send_to: BOOKING_CONVERSION
-      // Value is managed in Google Ads as a nominal lead value, not a paid sale.
-    });
+    // Invoked only after Web3Forms confirms success; do not send personal details.
+    if (choice !== 'accepted') return;
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'conversion', {
+        send_to: BOOKING_CONVERSION
+      });
+    }
+    if (typeof window.fbq === 'function' && metaLoaded) {
+      window.fbq('track', 'Lead');
+    }
   };
 })();
