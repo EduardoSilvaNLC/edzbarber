@@ -94,12 +94,3 @@ button{cursor:pointer}
 .cookie-settings{font-size:inherit;letter-spacing:inherit;font-weight:inherit;color:inherit;text-decoration:underline;text-underline-offset:3px;background:none;border:0;padding:0}
 .cookie-settings-inline{font-size:inherit;font-weight:inherit;color:#37592e;letter-spacing:normal}
 @media(max-width:720px){.cookie-banner{flex-direction:column;align-items:stretch;gap:12px;padding:14px;bottom:8px}.cookie-banner-copy{max-width:none}.cookie-banner-actions{width:100%}.cookie-choice{flex:1;min-width:0}}
-
-/* Compact hCaptcha: fits on narrow mobile screens without changing the booking layout. */
-.captcha-area{margin:0 0 20px;padding:14px 15px 12px;background:#edf2e7;border:1px solid #d7e2cc;border-radius:8px}
-.captcha-title{font-size:13px;font-weight:850;color:#263b29;margin:0 0 4px}
-.captcha-description{font-size:11px;line-height:1.5;color:#657565;margin:0 0 12px}
-.captcha-area .h-captcha{min-height:145px;max-width:100%;overflow:visible}
-.captcha-error{font-size:12px;font-weight:750;color:#a23022;margin:8px 0 0;line-height:1.5}
-.captcha-error[hidden]{display:none}
-@media(max-width:560px){.captcha-area{padding:12px;margin-bottom:17px}}

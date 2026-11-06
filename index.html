@@ -168,15 +168,6 @@
               </div>
             </details>
 
-            <!-- Security verification: Web3Forms checks the hCaptcha token on its server.
-                 This is essential anti-spam protection, separate from optional ad-tracking consent. -->
-            <div class="captcha-area" id="captcha-area" aria-labelledby="captcha-title">
-              <p class="captcha-title" id="captcha-title">Security check</p>
-              <p class="captcha-description">Please confirm you're human before sending your booking request.</p>
-              <div class="h-captcha" data-captcha="true" data-size="compact" data-theme="light"></div>
-              <p class="captcha-error" id="captcha-error" role="alert" hidden>Please complete the security check before sending.</p>
-            </div>
-
             <button class="submit-button" id="submit-booking" type="submit"><span>Send booking request</span><span
                 class="button-arrow" aria-hidden="true">↗</span></button>
             <div class="submission-notice"><span class="notice-icon" aria-hidden="true">ⓘ</span>
@@ -300,8 +291,6 @@
       <button class="cookie-choice" type="button" id="accept-tracking">Accept optional</button>
     </div>
   </aside>
-  <!-- Web3Forms hCaptcha client. Required for challenge; token verified by Web3Forms on submit. -->
-  <script src="https://web3forms.com/client/script.js" async defer></script>
 </body>
 
 </html>
