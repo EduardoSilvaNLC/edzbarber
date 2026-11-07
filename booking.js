@@ -4,13 +4,14 @@
   const status = document.getElementById('booking-status');
   const submit = document.getElementById('submit-booking');
   const date = document.getElementById('booking-date');
+  const time = document.getElementById('booking-time');
   const serviceChecks = Array.from(document.querySelectorAll('.service-checkbox'));
   const selectedServices = document.getElementById('selected-services');
   const selectedTotal = document.getElementById('selected-total');
   const serviceNames = document.getElementById('service-summary-name');
   const serviceTotal = document.getElementById('service-summary-total');
   const servicesError = document.getElementById('services-error');
-  if (!form || !status || !submit || !date || !selectedServices || !selectedTotal || !serviceChecks.length) return;
+  if (!form || !status || !submit || !date || !time || !selectedServices || !selectedTotal || !serviceChecks.length) return;
 
   function updateServices() {
     const chosen = serviceChecks.filter(box => box.checked);
@@ -42,6 +43,7 @@
   setMinDate();
   if (document.getElementById('copyright-year')) document.getElementById('copyright-year').textContent = String(new Date().getFullYear());
   date.addEventListener('change', () => { date.setCustomValidity(''); });
+  time.addEventListener('change', () => { time.setCustomValidity(''); });
 
   const originalContent = submit.innerHTML;
   form.addEventListener('submit', async (event) => {
@@ -49,6 +51,13 @@
     setMinDate();
     if (date.value && date.value < date.min) date.setCustomValidity('Choose today or a future date.');
     else date.setCustomValidity('');
+    // Validate the business hours even if the customer modifies the page controls.
+    const allowedTimes = Array.from(time.options).map(option => option.value).filter(Boolean);
+    if (time.value && !allowedTimes.includes(time.value)) {
+      time.setCustomValidity('Please select a time between 09:00 and 18:00.');
+    } else {
+      time.setCustomValidity('');
+    }
     const chosenServices = updateServices();
     if (!chosenServices.length) {
       servicesError.hidden = false;

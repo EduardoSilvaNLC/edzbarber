@@ -19,3 +19,6 @@ TEST
 5. Ensure failed submissions do not send a Lead. If Ads Manager cannot select this new dataset, check asset access/ownership.
 
 NOTE: The Meta Pixel may still need domain/asset verification, and the campaign requires a budget/schedule fix. We did not publish any live changes.
+
+UPDATE — 09:00–18:00 appointment requests
+Time field is now a dropdown with 30-minute steps from 09:00 to 18:00 (inclusive). Requests remain manually confirmed, not automatically booked. Replace all files at your site root; leave other deployed assets in place. The final 18:00 option is a requested start time; remove it if 18:00 is strictly closing time.
