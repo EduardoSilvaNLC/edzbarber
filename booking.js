@@ -89,7 +89,7 @@
       }
 
       form.hidden = true;
-      status.innerHTML = '<strong>Request sent ✓</strong><p>Thanks! Your request has been sent. I’ll check my diary and reply to your email to confirm a time or offer an alternative.<br><br><b>Please don’t travel to an appointment until I’ve confirmed it with you.</b></p><button class="resend" type="button">Send another request</button>';
+      status.innerHTML = '<strong>Request sent ✓</strong><p>Thanks! Your request has been sent. I’ll check my diary and confirm your time or offer an alternative by WhatsApp Business message or email.<br><br><b>Please don’t travel to an appointment until I’ve confirmed it with you.</b></p><button class="resend" type="button">Send another request</button>';
       status.querySelector('.resend').addEventListener('click', () => {
         form.reset();
         form.hidden = false;

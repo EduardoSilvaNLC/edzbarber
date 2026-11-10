@@ -27,7 +27,7 @@ button{cursor:pointer}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 
 
-/* Booking details: haircut £17, beard trim £7 and a clearly identified venue. */
+/* Booking details: haircut £10, beard trim £7 and a clearly identified venue. */
 .venue-card{margin-top:19px;border:1px solid #dce5d3;border-radius:8px;background:#e9efdf;padding:13px 14px;display:flex;align-items:center;justify-content:space-between;gap:15px}
 .venue-heading{display:flex;gap:10px;align-items:center;min-width:0}
 .venue-pin{display:grid;place-items:center;width:34px;height:34px;flex-shrink:0;border-radius:7px;background:#dceabf;color:#395b32;font-weight:950;font-size:24px}
@@ -94,3 +94,13 @@ button{cursor:pointer}
 .cookie-settings{font-size:inherit;letter-spacing:inherit;font-weight:inherit;color:inherit;text-decoration:underline;text-underline-offset:3px;background:none;border:0;padding:0}
 .cookie-settings-inline{font-size:inherit;font-weight:inherit;color:#37592e;letter-spacing:normal}
 @media(max-width:720px){.cookie-banner{flex-direction:column;align-items:stretch;gap:12px;padding:14px;bottom:8px}.cookie-banner-copy{max-width:none}.cookie-banner-actions{width:100%}.cookie-choice{flex:1;min-width:0}}
+
+/* Booking rules and mandatory agreement; uses existing brand colours. */
+.booking-policy{margin:0 0 18px;padding:17px 17px 15px;border:1px solid var(--border);border-radius:8px;background:#edf2e7}
+.booking-policy h3{font-size:14px;font-weight:900;letter-spacing:-.01em;margin:0 0 9px;color:#203325}
+.booking-policy ul{padding-left:19px;margin:0 0 15px;font-size:12px;line-height:1.65;color:#536653}
+.booking-policy li+li{margin-top:5px}
+.policy-agreement{display:flex;align-items:flex-start;gap:10px;border-top:1px solid #d1ddc8;padding-top:13px;font-size:12px;font-weight:750;line-height:1.55;color:#203325;cursor:pointer}
+.policy-agreement input[type="checkbox"]{flex:none;width:19px;height:19px;margin:1px 0 0;accent-color:#587b42;cursor:pointer}
+.policy-agreement strong{color:#a23022}
+@media(max-width:560px){.booking-policy{padding:14px}.booking-policy ul,.policy-agreement{font-size:11px}}
