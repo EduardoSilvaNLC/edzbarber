@@ -27,7 +27,7 @@ button{cursor:pointer}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 
 
-/* Booking details: haircut £10, beard trim £7 and a clearly identified venue. */
+/* Booking details: haircut £17, beard trim £7 and a clearly identified venue. */
 .venue-card{margin-top:19px;border:1px solid #dce5d3;border-radius:8px;background:#e9efdf;padding:13px 14px;display:flex;align-items:center;justify-content:space-between;gap:15px}
 .venue-heading{display:flex;gap:10px;align-items:center;min-width:0}
 .venue-pin{display:grid;place-items:center;width:34px;height:34px;flex-shrink:0;border-radius:7px;background:#dceabf;color:#395b32;font-weight:950;font-size:24px}
@@ -104,3 +104,6 @@ button{cursor:pointer}
 .policy-agreement input[type="checkbox"]{flex:none;width:19px;height:19px;margin:1px 0 0;accent-color:#587b42;cursor:pointer}
 .policy-agreement strong{color:#a23022}
 @media(max-width:560px){.booking-policy{padding:14px}.booking-policy ul,.policy-agreement{font-size:11px}}
+
+/* Consistent British date preview under the native date picker. */
+.date-uk-preview{font-size:11px;line-height:1.45;margin:6px 0 0;color:#647761;font-weight:650}

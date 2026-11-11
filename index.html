@@ -18,17 +18,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#101714">
   <meta name="description"
-    content="Men’s haircuts £10 and beard trims £7 at EDZ Barber, based inside Novo Studios, 47–51 Norfolk Street, Cambridge CB1 2LD. Request an appointment online; confirmation by WhatsApp Business or email.">
+    content="Men’s haircuts £17 and beard trims £7 at EDZ Barber, based inside Novo Studios, 47–51 Norfolk Street, Cambridge CB1 2LD. Request an appointment online; confirmation by WhatsApp Business or email.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Book a Haircut or Beard Trim in Cambridge | EDZ Barber">
   <meta property="og:description"
-    content="Men’s haircuts £10 and beard trims £7 at EDZ Barber, inside Novo Studios, 47–51 Norfolk Street, Cambridge. Request your preferred time online.">
+    content="Men’s haircuts £17 and beard trims £7 at EDZ Barber, inside Novo Studios, 47–51 Norfolk Street, Cambridge. Request your preferred time online.">
   <meta property="og:url" content="https://www.edzbarber.co.uk/">
   <link rel="canonical" href="https://www.edzbarber.co.uk/">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
   <script src="booking.js" defer></script>
-  <title>Men’s Haircuts £10 · Beard Trims £7 | EDZ Barber Cambridge</title>
+  <title>Men’s Haircuts £17 · Beard Trims £7 | EDZ Barber Cambridge</title>
 </head>
 
 <body>
@@ -56,7 +56,7 @@
           <div class="eyebrow"><span class="asterisk" aria-hidden="true">✳</span> EDZ BARBER / CAMBRIDGE</div>
           <h1 id="hero-title">YOUR<br>NEXT CUT.<br><span class="accent-line">SORTED<span class="period">.</span></span>
           </h1>
-          <p class="hero-description">Men’s haircuts £10 and beard trims £7 at EDZ Barber, based inside <strong>Novo
+          <p class="hero-description">Men’s haircuts £17 and beard trims £7 at EDZ Barber, based inside <strong>Novo
               Studios</strong> in Cambridge. Add the services you want, choose a time and I’ll confirm personally by WhatsApp Business or email. Men only.</p>
           <div class="story-badges" aria-label="Booking benefits">
             <span><span aria-hidden="true">✓</span> NO ACCOUNT</span>
@@ -74,7 +74,7 @@
           </div>
           <div class="form-intro">
             <h2 id="booking-title">Let's get you<br><em>booked in.</em></h2>
-            <p>Men only · Haircut £10 · Beard Trim £7. Add one or both services, choose a date and time. I’ll confirm by WhatsApp Business message or email.
+            <p>Men only · Haircut £17 · Beard Trim £7. Add one or both services, choose a date and time. I’ll confirm by WhatsApp Business message or email.
             </p>
             <div class="venue-card">
               <div class="venue-heading"><span class="venue-pin" aria-hidden="true">⌖</span>
@@ -89,8 +89,8 @@
             <input type="hidden" name="access_key" value="c25bfc3a-6f18-4bb9-8f61-29de231f1bf9">
             <input type="hidden" name="subject" value="EDZ Barber | New booking request">
             <input type="hidden" name="from_name" value="EDZ Barber Bookings">
-            <input type="hidden" name="services" id="selected-services" value="Haircut — £10">
-            <input type="hidden" name="total_price" id="selected-total" value="£10">
+            <input type="hidden" name="services" id="selected-services" value="Haircut — £17">
+            <input type="hidden" name="total_price" id="selected-total" value="£17">
             <input type="checkbox" name="botcheck" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
 
             <fieldset class="input-group service-selector" id="services-group"
@@ -99,11 +99,11 @@
               <p class="service-hint" id="services-help">Select one or both. Tap a service to add or remove it.</p>
               <div class="service-options" role="group" aria-label="Choose one or more services">
                 <label class="service-option">
-                  <input id="service-haircut" class="service-checkbox" type="checkbox" value="Haircut — £10"
-                    data-price="10" checked>
+                  <input id="service-haircut" class="service-checkbox" type="checkbox" value="Haircut — £17"
+                    data-price="17" checked>
                   <span class="service-option-body"><span class="service-option-title">Haircut</span><span
                       class="service-option-subtitle">Men’s haircuts · All styles</span></span>
-                  <strong>£10</strong>
+                  <strong>£17</strong>
                   <span class="service-toggle" aria-hidden="true"></span>
                 </label>
                 <label class="service-option">
@@ -119,7 +119,7 @@
               <div class="service-summary" aria-live="polite" aria-atomic="true">
                 <div class="service-summary-detail"><span>YOUR BOOKING</span><strong
                     id="service-summary-name">Haircut</strong></div>
-                <div class="service-summary-price"><span>TOTAL</span><strong id="service-summary-total">£10</strong>
+                <div class="service-summary-price"><span>TOTAL</span><strong id="service-summary-total">£17</strong>
                 </div>
               </div>
             </fieldset>
@@ -128,36 +128,37 @@
               <legend>02 <span>Preferred appointment</span></legend>
               <div class="two-fields-inner">
                 <div class="field">
-                  <label class="sub-label" for="booking-date">Date</label>
-                  <input id="booking-date" name="preferred_date" type="date" required>
+                  <label class="sub-label" for="booking-date">Date (DD/MM/YYYY)</label>
+                  <input id="booking-date" name="preferred_date" type="date" lang="en-GB" aria-describedby="date-uk-preview" required>
+                  <p id="date-uk-preview" class="date-uk-preview" aria-live="polite">UK date format: DD/MM/YYYY</p>
                 </div>
                 <div class="field">
                   <label class="sub-label" for="booking-time">Time</label>
                   <select id="booking-time" name="preferred_time" required>
                     <option value="" selected disabled>Select a time</option>
-                    <option value="09:00">09:00</option>
+                    <option value="09:00">9:00 am</option>
 
-                    <option value="10:00">10:00</option>
+                    <option value="10:00">10:00 am</option>
 
-                    <option value="11:00">11:00</option>
+                    <option value="11:00">11:00 am</option>
 
-                    <option value="12:00">12:00</option>
+                    <option value="12:00">12:00 pm</option>
 
-                    <option value="13:00">13:00</option>
+                    <option value="13:00">1:00 pm</option>
 
-                    <option value="14:00">14:00</option>
+                    <option value="14:00">2:00 pm</option>
 
-                    <option value="15:00">15:00</option>
+                    <option value="15:00">3:00 pm</option>
 
-                    <option value="16:00">16:00</option>
+                    <option value="16:00">4:00 pm</option>
 
-                    <option value="17:00">17:00</option>
+                    <option value="17:00">5:00 pm</option>
 
-                    <option value="18:00">18:00</option>
+                    <option value="18:00">6:00 pm</option>
                   </select>
                 </div>
               </div>
-              <p class="field-help">Appointment requests: 09:00–18:00 (UK time). These are preferences, not live
+              <p class="field-help">Appointment requests: 9:00 am–6:00 pm (UK time). These are preferences, not live
                 available slots.</p>
             </fieldset>
 
@@ -290,8 +291,8 @@
           </details>
           <details>
             <summary>How much do services cost?</summary>
-            <p>Men only. Every haircut is £10, including skin fades and classic cuts. A beard trim costs £7. Select one or both
-              services above. Haircut + beard trim costs £17 in total.</p>
+            <p>Men only. Every haircut is £17, including skin fades and classic cuts. A beard trim costs £7. Select one or both
+              services above. Haircut + beard trim costs £24 in total.</p>
           </details>
         </div>
       </div>

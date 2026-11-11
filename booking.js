@@ -39,10 +39,30 @@
     const p = Object.fromEntries(parts.filter(x => x.type !== 'literal').map(x => [x.type,x.value]));
     return `${p.year}-${p.month}-${p.day}`;
   };
+  // Display the selected date in British order, independent of browser locale.
+  // Keep the native calendar control so that mobile and desktop date picking still works.
+  const ukDatePreview = document.getElementById('date-uk-preview');
+  const formatUKDate = (iso) => {
+    const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || '');
+    return match ? `${match[3]}/${match[2]}/${match[1]}` : '';
+  };
+  const formatUKTime = (clock) => {
+    const match = /^(\d{2}):(\d{2})$/.exec(clock || '');
+    if (!match) return '';
+    const hour = Number(match[1]);
+    return `${hour % 12 || 12}:${match[2]} ${hour < 12 ? 'am' : 'pm'}`;
+  };
+  const updateDatePreview = () => {
+    if (ukDatePreview) ukDatePreview.textContent = date.value
+      ? `Selected date: ${formatUKDate(date.value)}`
+      : 'UK date format: DD/MM/YYYY';
+  };
   const setMinDate = () => { date.min = localUKDate(); };
   setMinDate();
   if (document.getElementById('copyright-year')) document.getElementById('copyright-year').textContent = String(new Date().getFullYear());
-  date.addEventListener('change', () => { date.setCustomValidity(''); });
+  date.addEventListener('change', () => { date.setCustomValidity(''); updateDatePreview(); });
+  date.addEventListener('input', updateDatePreview);
+  updateDatePreview();
   time.addEventListener('change', () => { time.setCustomValidity(''); });
 
   const originalContent = submit.innerHTML;
@@ -54,7 +74,7 @@
     // Validate the business hours even if the customer modifies the page controls.
     const allowedTimes = Array.from(time.options).map(option => option.value).filter(Boolean);
     if (time.value && !allowedTimes.includes(time.value)) {
-      time.setCustomValidity('Please select a time between 09:00 and 18:00.');
+      time.setCustomValidity('Please select a time between 9:00 am and 6:00 pm.');
     } else {
       time.setCustomValidity('');
     }
@@ -76,6 +96,9 @@
     try {
       // Web3Forms accepts JSON and automatically uses the 'email' field as Reply-To.
       const body = Object.fromEntries(new FormData(form).entries());
+      // Send human-readable British date/time in the booking email.
+      body.preferred_date = formatUKDate(date.value);
+      body.preferred_time = formatUKTime(time.value);
       const response = await fetch(form.action, {
         method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body)
       });
@@ -99,6 +122,7 @@
         submit.innerHTML = originalContent;
         setMinDate();
         updateServices();
+        updateDatePreview();
         form.querySelector('#booking-date').focus();
       });
       status.hidden = false;

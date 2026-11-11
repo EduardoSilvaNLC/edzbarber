@@ -1,3 +1,28 @@
+EDZ BARBER — UPDATED SITE (11 NOVEMBER 2026)
+
+CURRENT SETTINGS (this release)
+- Men’s haircut: £17 (including fades and classic cuts).
+- Beard trim: £7.
+- Haircut + beard trim: £24.
+- Time choices shown in 12-hour UK style (9:00 am to 6:00 pm, on the hour).
+- Dates show a UK DD/MM/YYYY preview after selection; booking emails use DD/MM/YYYY.
+- Time and date picker still validate using safe ISO / 24-hour machine values internally.
+- The native date picker may show a locale-dependent entry order until a date is selected.
+- Booking emails use British-style times such as 2:00 pm.
+- Manual confirmation by WhatsApp Business message or email.
+- Colors, site layout, cookie choices, Google Ads / Meta measurement and booking rules unchanged.
+
+TO PUBLISH
+1. Extract the ZIP archive.
+2. Put index.html, booking.js, consent.js, style.css, privacy.html, favicon.svg in the website root, replacing the existing versions with those names.
+3. Keep any other existing website assets/folders.
+4. Check the page in a private window and do one test booking (then delete the test message).
+5. Confirm that you receive DD/MM/YYYY and am/pm in the booking email, and the price is £17.
+
+IMPORTANT: This archive changes local site files only. It does not publish to Vercel or GitHub.
+A selected appointment time is a REQUEST and is not confirmed until you reply.
+
+----- PRIOR CHANGE NOTES -----
 EDZ BARBER – Meta Pixel + Google Ads booking conversion (6 Nov 2026)
 
 Deploy all files together to the root of the website repository. Keep any existing booking/ folder and other assets already deployed.
