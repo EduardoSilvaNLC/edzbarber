@@ -1,10 +1,10 @@
-EDZ BARBER — UPDATED SITE (12 NOVEMBER 2026)
+EDZ BARBER — UPDATED SITE (13 NOVEMBER 2026)
 
 CURRENT SETTINGS (this release)
 - Men’s haircut: £17 (including fades and classic cuts).
 - Beard trim: £7.
 - Haircut + beard trim: £24.
-- Time choices shown in 24-hour format (09:00 to 18:00, on the hour).
+- Time choices shown in 24-hour format (09:00 to 19:00, on the hour).
 - Dates show a UK DD/MM/YYYY preview after selection; booking emails use DD/MM/YYYY.
 - Time and date picker still validate using safe ISO / 24-hour machine values internally.
 - The native date picker may show a locale-dependent entry order until a date is selected.
@@ -17,10 +17,15 @@ TO PUBLISH
 2. Put index.html, booking.js, consent.js, style.css, privacy.html, favicon.svg in the website root, replacing the existing versions with those names.
 3. Keep any other existing website assets/folders.
 4. Check the page in a private window and do one test booking (then delete the test message).
-5. Confirm that you receive DD/MM/YYYY and 24-hour time (e.g. 14:00) in the booking email, and the price is £17.
+5. Confirm that 19:00 appears in the time dropdown and is sent in the booking email; price remains £17.
 
 IMPORTANT: This archive changes local site files only. It does not publish to Vercel or GitHub.
 A selected appointment time is a REQUEST and is not confirmed until you reply.
+
+UPDATE — 13 NOVEMBER 2026
+- Added 19:00 as an additional appointment request start time.
+- Updated the visible booking-hours note and the validation message to 09:00–19:00.
+- Existing hours 09:00–18:00, service prices, form delivery, privacy and advertising tracking are unchanged.
 
 ----- PRIOR CHANGE NOTES -----
 EDZ BARBER – Meta Pixel + Google Ads booking conversion (6 Nov 2026)

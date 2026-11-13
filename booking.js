@@ -73,7 +73,7 @@
     // Validate the business hours even if the customer modifies the page controls.
     const allowedTimes = Array.from(time.options).map(option => option.value).filter(Boolean);
     if (time.value && !allowedTimes.includes(time.value)) {
-      time.setCustomValidity('Please select a time between 09:00 and 18:00.');
+      time.setCustomValidity('Please select a time between 09:00 and 19:00.');
     } else {
       time.setCustomValidity('');
     }
