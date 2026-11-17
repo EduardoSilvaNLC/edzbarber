@@ -1,4 +1,4 @@
-EDZ BARBER — £15 HAIRCUT / 24-HOUR BOOKING VERSION (12 NOVEMBER 2026)
+EDZ BARBER — £15 HAIRCUT / BOOKINGS UNTIL 20:00 (17 NOVEMBER 2026)
 
 PRICING
 - Men’s haircut, including fades and classic cuts: £15
@@ -7,7 +7,7 @@ PRICING
 - Totals displayed on site and included in booking emails match these prices.
 
 APPOINTMENTS
-- Appointment times appear in 24-hour format: 09:00–18:00 inclusive (every full hour).
+- Appointment times appear in 24-hour format: 09:00–19:00 inclusive (every full hour). The 19:00 booking is a one-hour appointment that ends at 20:00.
 - On selecting a date, a preview shows DD/MM/YYYY; requests sent by email use DD/MM/YYYY.
 - Native calendar date input may itself use the visitor's browser locale.
 - Appointments are NOT instantly confirmed. The barber confirms by WhatsApp Business or email.
@@ -22,7 +22,7 @@ PUBLISH THIS VERSION
 1. Extract the ZIP and copy its 7 files to the website repository root, replacing files with the same names.
 2. Keep all other folders/assets already on the website.
 3. Commit/push your changes to GitHub; Vercel can then redeploy if connected to that repository.
-4. Open a private browser window and check the haircut price £15, combined price £22, date preview and 24-hour time selector.
+4. Open a private browser window and check the haircut price £15, combined price £22, date preview and the new 19:00 time option in the 24-hour selector.
 5. Send one test request and verify its selected service, price, date (DD/MM/YYYY), and time (e.g. 14:00, not 2:00 pm) in your inbox.
 
 IMPORTANT: This ZIP changes local files only. It has NOT been published online.
