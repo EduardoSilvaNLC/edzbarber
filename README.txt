@@ -1,67 +1,29 @@
-EDZ BARBER — UPDATED SITE (13 NOVEMBER 2026)
+EDZ BARBER — £15 HAIRCUT / 24-HOUR BOOKING VERSION (12 NOVEMBER 2026)
 
-CURRENT SETTINGS (this release)
-- Men’s haircut: £17 (including fades and classic cuts).
-- Beard trim: £7.
-- Haircut + beard trim: £24.
-- Time choices shown in 24-hour format (09:00 to 19:00, on the hour).
-- Dates show a UK DD/MM/YYYY preview after selection; booking emails use DD/MM/YYYY.
-- Time and date picker still validate using safe ISO / 24-hour machine values internally.
-- The native date picker may show a locale-dependent entry order until a date is selected.
-- Booking emails use 24-hour times such as 14:00 (no am/pm).
-- Manual confirmation by WhatsApp Business message or email.
-- Colors, site layout, cookie choices, Google Ads / Meta measurement and booking rules unchanged.
+PRICING
+- Men’s haircut, including fades and classic cuts: £15
+- Beard trim: £7
+- Haircut + beard trim: £22
+- Totals displayed on site and included in booking emails match these prices.
 
-TO PUBLISH
-1. Extract the ZIP archive.
-2. Put index.html, booking.js, consent.js, style.css, privacy.html, favicon.svg in the website root, replacing the existing versions with those names.
-3. Keep any other existing website assets/folders.
-4. Check the page in a private window and do one test booking (then delete the test message).
-5. Confirm that 19:00 appears in the time dropdown and is sent in the booking email; price remains £17.
+APPOINTMENTS
+- Appointment times appear in 24-hour format: 09:00–18:00 inclusive (every full hour).
+- On selecting a date, a preview shows DD/MM/YYYY; requests sent by email use DD/MM/YYYY.
+- Native calendar date input may itself use the visitor's browser locale.
+- Appointments are NOT instantly confirmed. The barber confirms by WhatsApp Business or email.
+- These are requests, not live available slots.
 
-IMPORTANT: This archive changes local site files only. It does not publish to Vercel or GitHub.
-A selected appointment time is a REQUEST and is not confirmed until you reply.
+UNCHANGED
+- Site design, colours, styling, location, booking policy, and required booking consent.
+- Google Ads / Meta Pixel settings, cookie consent, privacy notice, contact form and its destination.
+- Beard trim price is £7.
 
-UPDATE — 13 NOVEMBER 2026
-- Added 19:00 as an additional appointment request start time.
-- Updated the visible booking-hours note and the validation message to 09:00–19:00.
-- Existing hours 09:00–18:00, service prices, form delivery, privacy and advertising tracking are unchanged.
+PUBLISH THIS VERSION
+1. Extract the ZIP and copy its 7 files to the website repository root, replacing files with the same names.
+2. Keep all other folders/assets already on the website.
+3. Commit/push your changes to GitHub; Vercel can then redeploy if connected to that repository.
+4. Open a private browser window and check the haircut price £15, combined price £22, date preview and 24-hour time selector.
+5. Send one test request and verify its selected service, price, date (DD/MM/YYYY), and time (e.g. 14:00, not 2:00 pm) in your inbox.
 
------ PRIOR CHANGE NOTES -----
-EDZ BARBER – Meta Pixel + Google Ads booking conversion (6 Nov 2026)
-
-Deploy all files together to the root of the website repository. Keep any existing booking/ folder and other assets already deployed.
-
-WHAT CHANGED
-- Meta Pixel 1076609655424186 is loaded by consent.js ONLY after optional advertising consent.
-- The cookie banner and privacy page disclose BOTH Google Ads and Meta Pixel.
-- Consent is re-requested because previous Google-only consent cannot authorize Meta.
-- Meta PageView is a standard event sent after consent.
-- Meta Lead is sent only after a successful Web3Forms booking request, via the existing booking.js callback.
-- Existing Google Ads conversion ID and booking success logic are unchanged.
-- Layout and £17 standard pricing were left untouched. The £10 offer for Nov 7 needs its own clear landing-page promotion/terms before running ads.
-
-TEST
-1. Deploy. Test in a fresh private browser. Before consent, neither Google nor Meta Pixel should send tracking.
-2. Reject optional -> no ad tracking, booking must still work.
-3. In another fresh private browser window, accept optional -> check PageView in Meta Events Manager Test Events.
-4. Send ONE successful test booking -> confirm exactly one Meta Lead and Google Ads booking conversion.
-5. Ensure failed submissions do not send a Lead. If Ads Manager cannot select this new dataset, check asset access/ownership.
-
-NOTE: The Meta Pixel may still need domain/asset verification, and the campaign requires a budget/schedule fix. We did not publish any live changes.
-
-UPDATE — 09:00–18:00 appointment requests
-Time field is a dropdown with 1-hour steps from 09:00 to 18:00 (inclusive). Requests remain manually confirmed, not automatically booked. Replace all files at your site root; leave other deployed assets in place. The final 18:00 option is a requested start time; remove it if 18:00 is strictly closing time.
-
-UPDATE — 9 November 2026
-Men-only haircuts are £10; beard trims remain £7 (combined total £17). Both mobile number and email are mandatory; confirmations are sent manually via WhatsApp Business message or email. No automatic WhatsApp sending was added. Visual design, booking hours, cookies and tracking scripts remain unchanged.
-
-
-UPDATE — Booking policy and required agreement (9 November 2026)
-- Added a visible booking policy immediately above the submission button.
-- Customers must tick “I have read and agree to the booking policy” before the browser allows submission.
-- The checkbox value (booking_policy_accepted=Yes) is included in the Web3Forms email.
-- Rules apply equally to all customers and refer only to punctuality, confirmation and conduct.
-- Prices, booking hours, design palette, cookie preferences, Google Ads/Meta tracking, and manual confirmation are unchanged.
-- Upload all files together, replacing matching filenames at your website root.
-- Test a request with the checkbox unticked (must be blocked), then tick and submit a single test request; confirm the email arrives. A browser-side checkbox cannot prevent deliberately forged submissions without server-side verification.
+IMPORTANT: This ZIP changes local files only. It has NOT been published online.
+Do not upload the £10 and £15 versions together; choose the price you want live.

@@ -47,7 +47,6 @@
     return match ? `${match[3]}/${match[2]}/${match[1]}` : '';
   };
   const formatUKTime = (clock) => {
-    // Keep 24-hour HH:MM time both on screen and in the booking email.
     const match = /^(\d{2}):(\d{2})$/.exec(clock || '');
     return match ? `${match[1]}:${match[2]}` : '';
   };
@@ -73,7 +72,7 @@
     // Validate the business hours even if the customer modifies the page controls.
     const allowedTimes = Array.from(time.options).map(option => option.value).filter(Boolean);
     if (time.value && !allowedTimes.includes(time.value)) {
-      time.setCustomValidity('Please select a time between 09:00 and 19:00.');
+      time.setCustomValidity('Please select a time between 09:00 and 18:00.');
     } else {
       time.setCustomValidity('');
     }
@@ -95,7 +94,7 @@
     try {
       // Web3Forms accepts JSON and automatically uses the 'email' field as Reply-To.
       const body = Object.fromEntries(new FormData(form).entries());
-      // Send DD/MM/YYYY date and 24-hour HH:MM time in the booking email.
+      // Send British date and 24-hour time in the booking email.
       body.preferred_date = formatUKDate(date.value);
       body.preferred_time = formatUKTime(time.value);
       const response = await fetch(form.action, {
