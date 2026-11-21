@@ -1,194 +1,221 @@
 (() => {
   'use strict';
-  const form = document.querySelector('#booking-request-form');
+  const $ = (id) => document.getElementById(id);
+  const form = $('booking-request-form');
   if (!form) return;
-  const $ = selector => document.querySelector(selector);
-  const steps = [...document.querySelectorAll('[data-step]')];
-  const progress = [...document.querySelectorAll('[data-progress]')];
-  const date = $('#booking-date');
-  const timeGrid = $('#time-grid');
-  const status = $('#booking-status');
-  const submit = $('#submit-booking');
-  const serviceOptions = [...document.querySelectorAll('input[name="service_choice"]')];
-  const config = window.EDZ_BOOKING_SCHEDULE || {};
-  const regularDayTimes = config.regularDayTimes || ['16:00', '17:00', '18:00', '19:00'];
-  const dayOffTimes = config.dayOffTimes || ['09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00'];
-  const daysOff = config.daysOff || [];
-  const closedDates = config.closedDates || [];
-  const blockedTimes = config.blockedTimes || {};
-  const leadMinutes = Number(config.minimumLeadMinutes) || 60;
+  const section = $('booking');
+  const service = $('service-choice');
+  const date = $('date-choice');
+  const time = $('time-choice');
+  const selectors = $('booking-selectors');
+  const details = $('details-panel');
+  const continueButton = $('continue-booking');
+  const submitButton = $('send-request');
+  const error = $('booking-error');
+  const result = $('booking-result');
+  const hint = $('date-help');
+  const schedule = window.EDZ_BOOKING_SCHEDULE || {};
   const services = {
-    haircut: {name:"Men's Haircut", price:15},
-    beard: {name:'Beard Trim', price:7},
-    both: {name:'Haircut + Beard', price:22}
+    haircut: { name: "Men's Haircut", price: 15 },
+    beard: { name: 'Beard Trim', price: 7 },
+    both: { name: 'Haircut + Beard', price: 22 }
   };
-  let step = 0;
-  let selectedTime = '';
-  let pending = false;
-  const londonNow = () => Object.fromEntries(new Intl.DateTimeFormat('en-GB', {
-    timeZone:'Europe/London', year:'numeric', month:'2-digit', day:'2-digit',
-    hour:'2-digit', minute:'2-digit', hourCycle:'h23'
-  }).formatToParts(new Date()).filter(p => p.type !== 'literal').map(p => [p.type,p.value]));
-  const ukToday = () => { const p=londonNow(); return `${p.year}-${p.month}-${p.day}`; };
-  const showBritishDate = iso => {const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || ''); return m ? `${m[3]}/${m[2]}/${m[1]}` : '';};
-  const getService = () => services[(serviceOptions.find(r => r.checked) || serviceOptions[0]).value] || services.haircut;
+  const regular = schedule.regularDayTimes || ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
+  const dayOff = schedule.dayOffTimes || ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
+  const daysOff = schedule.daysOff || [];
+  const closedDates = schedule.closedDates || [];
+  const blockedTimes = schedule.blockedTimes || {};
+  const leadMinutes = Number(schedule.minimumLeadMinutes) || 60;
+  const maxDaysAhead = Number(schedule.maxDaysAhead) || 90;
+  let sending = false;
 
-  function setStep(target, scroll = false) {
-    step = target;
-    steps.forEach(el => { el.hidden = Number(el.dataset.step) !== step; });
-    progress.forEach(el => {
-      const n = Number(el.dataset.progress);
-      el.classList.toggle('current', n === step);
-      el.classList.toggle('done', n < step);
-      if (n === step) el.setAttribute('aria-current','step'); else el.removeAttribute('aria-current');
-    });
-    if (scroll) $('#booking').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth',block:'start'});
+  // UK time is authoritative even if someone visits the site from another timezone.
+  const ukParts = () => Object.fromEntries(new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Europe/London', year: 'numeric', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
+  }).formatToParts(new Date()).filter(x => x.type !== 'literal').map(x => [x.type, x.value]));
+  function todayISO() {
+    const n = ukParts();
+    return `${n.year}-${n.month}-${n.day}`;
   }
-  function chooseService(value) {
-    const r = serviceOptions.find(x => x.value === value);
-    if (!r) return;
-    r.checked = true;
-    document.querySelectorAll('.service-option').forEach(label => label.classList.toggle('selected',label.contains(r)));
-    const s = getService();
-    $('#booking-services').value = `${s.name} — £${s.price}`;
-    $('#booking-total').value = `£${s.price}`;
+  function maxDateISO() {
+    const d = new Date(`${todayISO()}T12:00:00Z`);
+    d.setUTCDate(d.getUTCDate() + maxDaysAhead);
+    return d.toISOString().slice(0, 10);
   }
-  serviceOptions.forEach(r => r.addEventListener('change',() => chooseService(r.value)));
-  chooseService('haircut');
-
-  function requestTimes(iso) {
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(iso || '') || iso < ukToday() || closedDates.includes(iso)) return [];
-    const all = daysOff.includes(iso) ? dayOffTimes : regularDayTimes;
-    let times = all.filter(t => /^([01]\d|2[0-3]):[0-5]\d$/.test(t) && !(blockedTimes[iso] || []).includes(t));
-    if (iso === ukToday()) {
-      const now = londonNow();
-      const limit = Number(now.hour)*60 + Number(now.minute) + leadMinutes;
-      times = times.filter(t => Number(t.slice(0,2))*60 + Number(t.slice(3)) >= limit);
+  function britishDate(iso) {
+    const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || '');
+    return match ? `${match[3]}/${match[2]}/${match[1]}` : '';
+  }
+  function validDate(iso) {
+    if (!/^\d{4}-\d\d-\d\d$/.test(iso || '')) return false;
+    const parsed = new Date(`${iso}T12:00:00Z`);
+    return !Number.isNaN(parsed.valueOf()) && parsed.toISOString().slice(0, 10) === iso && iso >= todayISO() && iso <= maxDateISO() && !closedDates.includes(iso);
+  }
+  function slotsFor(iso) {
+    if (!validDate(iso)) return [];
+    const options = daysOff.includes(iso) ? dayOff : regular;
+    let slots = options.filter(x => /^([01]\d|2[0-3]):[0-5]\d$/.test(x) && !(blockedTimes[iso] || []).includes(x));
+    if (iso === todayISO()) {
+      const now = ukParts();
+      const min = Number(now.hour) * 60 + Number(now.minute) + leadMinutes;
+      slots = slots.filter(x => Number(x.slice(0, 2)) * 60 + Number(x.slice(3)) >= min);
     }
-    return [...new Set(times)].sort();
+    return [...new Set(slots)].sort();
   }
-  function refreshDate() {
-    date.min = ukToday();
-    $('#date-preview').textContent = date.value ? `Selected date: ${showBritishDate(date.value)}` : 'UK date format: DD/MM/YYYY';
-    const times = requestTimes(date.value);
-    if (!date.value) $('#date-note').textContent = 'Choose a date to see the request times.';
-    else if (date.value < ukToday()) $('#date-note').textContent = 'Please choose today or a future date.';
-    else if (closedDates.includes(date.value)) $('#date-note').textContent = 'No appointments can be requested on this date.';
-    else if (!times.length) $('#date-note').textContent = 'There are no request times remaining on this day. Please choose another date.';
-    else $('#date-note').textContent = `${daysOff.includes(date.value)?'Day-off':'Working-day'} request times are available to select. All requests require personal confirmation.`;
-    if (selectedTime && !times.includes(selectedTime)) selectedTime = '';
-    $('#date-error').hidden = true;
+  function showError(message) {
+    error.textContent = message;
+    error.hidden = !message;
   }
-  date.addEventListener('input', refreshDate);
-  date.addEventListener('change', refreshDate);
-  refreshDate();
-
-  function renderTimes() {
-    const times = requestTimes(date.value);
-    timeGrid.replaceChildren();
-    $('#chosen-date-label').textContent = showBritishDate(date.value);
-    if (!times.length) {
-      const message=document.createElement('p'); message.textContent='No request times for this date. Go back and choose another.';message.className='field-hint';timeGrid.appendChild(message);
-      return;
+  function updateTimes() {
+    date.min = todayISO();
+    date.max = maxDateISO();
+    const previous = time.value;
+    const slots = slotsFor(date.value);
+    time.replaceChildren();
+    const first = new Option(date.value ? (slots.length ? 'Select a time' : 'No request times on this date') : 'Choose a date first', '');
+    time.add(first);
+    slots.forEach(t => time.add(new Option(t, t)));
+    time.value = slots.includes(previous) ? previous : '';
+    time.disabled = slots.length === 0;
+    hint.textContent = slots.length
+      ? 'Preferred times in UK local time (24-hour clock). All requests need manual confirmation; no online payment.'
+      : 'Choose a date to see preferred request times. These are not live availability.';
+    showError('');
+  }
+  function resetToBooking() {
+    details.hidden = true;
+    selectors.hidden = false;
+    hint.hidden = false;
+    continueButton.focus({preventScroll:true});
+  }
+  function enterDetails() {
+    showError('');
+    if (!validDate(date.value)) {
+      showError('Please choose an available future date.');
+      date.focus(); return;
     }
-    times.forEach(time => {
-      const btn=document.createElement('button');btn.type='button';btn.textContent=time;btn.className=time === selectedTime ? 'selected' : '';
-      btn.setAttribute('aria-pressed',String(time === selectedTime));
-      btn.addEventListener('click',() => {
-        selectedTime = time;
-        [...timeGrid.querySelectorAll('button')].forEach(el => {const isChosen=el===btn; el.classList.toggle('selected',isChosen);el.setAttribute('aria-pressed',String(isChosen));});
-        $('#time-error').hidden=true;
-      });
-      timeGrid.appendChild(btn);
+    if (!slotsFor(date.value).includes(time.value)) {
+      showError('Please select a preferred time for this date.');
+      time.focus(); return;
+    }
+    const picked = services[service.value] || services.haircut;
+    $('booking-summary').replaceChildren();
+    const a = document.createElement('strong');
+    a.textContent = `${picked.name} — £${picked.price}`;
+    const b = document.createElement('span');
+    b.textContent = `${britishDate(date.value)} at ${time.value} (UK time)`;
+    $('booking-summary').append(a, b);
+    selectors.hidden = true;
+    hint.hidden = true;
+    details.hidden = false;
+    $('customer-name').focus({preventScroll:true});
+    if (window.innerWidth < 760) section.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function resultMessage(type, title, message) {
+    result.hidden = false;
+    result.className = `booking-result${type === 'error' ? ' error' : ''}`;
+    result.replaceChildren();
+    const h = document.createElement('h3'); h.textContent = title;
+    const p = document.createElement('p'); p.textContent = message;
+    result.append(h, p);
+  }
+  date.addEventListener('change', updateTimes);
+  date.addEventListener('input', updateTimes);
+  service.addEventListener('change', () => showError(''));
+  time.addEventListener('change', () => showError(''));
+  continueButton.addEventListener('click', enterDetails);
+  $('edit-selection').addEventListener('click', () => {
+    resetToBooking();
+    showError('');
+  });
+  document.querySelectorAll('[data-book-service]').forEach(button => {
+    button.addEventListener('click', () => {
+      const value = button.getAttribute('data-book-service');
+      if (services[value]) service.value = value;
+      if (!details.hidden) resetToBooking();
+      section.scrollIntoView({behavior:'smooth',block:'start'});
     });
-  }
-  function validateDate() {
-    refreshDate();
-    const valid = date.checkValidity() && date.value >= ukToday() && requestTimes(date.value).length > 0;
-    $('#date-error').hidden = valid;
-    if (!valid) date.focus();
-    return valid;
-  }
-  function validateDetails() {
-    const contactFields=['#booking-name','#booking-phone','#booking-email','#booking-policy'].map($);
-    const bad=contactFields.find(el => !el.checkValidity());
-    $('#details-error').hidden = !bad;
-    if (bad) {bad.focus();bad.reportValidity();return false;}
-    return true;
-  }
-  document.querySelectorAll('[data-next]').forEach(btn => btn.addEventListener('click',() => {
-    const target=Number(btn.dataset.next);
-    if (step === 1 && !validateDate()) return;
-    if (step === 2 && (!requestTimes(date.value).includes(selectedTime))) {$('#time-error').hidden=false;return;}
-    if (target===2) renderTimes();
-    if (target===3) updateSummary();
-    setStep(target);
-  }));
-  document.querySelectorAll('[data-back]').forEach(btn => btn.addEventListener('click',() => setStep(Number(btn.dataset.back))));
-  $('#change-date').addEventListener('click', () => setStep(1));
-  document.querySelectorAll('[data-service-book]').forEach(btn => btn.addEventListener('click',() => {chooseService(btn.dataset.serviceBook);setStep(1,true);date.focus({preventScroll:true});}));
-  function updateSummary() {
-    const s=getService();
-    const summary=$('#booking-summary');
-    summary.replaceChildren();
-    const name=document.createElement('strong');name.textContent=`${s.name} — £${s.price}`;
-    const when=document.createElement('span');when.textContent=`${showBritishDate(date.value)} at ${selectedTime} (UK time)`;
-    summary.append(name,when);
-  }
-  function setStatus(type,heading,body) {
-    status.hidden=false;
-    status.className=`booking-status${type==='error'?' error':''}`;
-    status.replaceChildren();
-    const h=document.createElement('h3');h.textContent=heading;
-    const p=document.createElement('p');p.textContent=body;
-    status.append(h,p);
-  }
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-    if (pending) return;
-    if (!validateDate()) {setStep(1);return;}
-    if (!selectedTime || !requestTimes(date.value).includes(selectedTime)) {setStep(2);renderTimes();$('#time-error').hidden=false;return;}
-    if (!validateDetails()) return;
-    const s=getService();
-    $('#booking-services').value=`${s.name} — £${s.price}`;
-    $('#booking-total').value=`£${s.price}`;
-    $('#preferred-date').value=showBritishDate(date.value);
-    $('#preferred-time').value=selectedTime;
-    $('#booking-subject').value=`EDZ Barber | Booking request: ${s.name} (£${s.price})`;
-    const payload=Object.fromEntries(new FormData(form).entries());
-    // Never send contact data to Google Ads or Meta; only to the existing Web3Forms endpoint.
-    delete payload.service_choice;
-    pending=true;
-    submit.disabled=true;
-    submit.textContent='SENDING REQUEST…';
-    status.hidden=true;
+  });
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (sending) return;
+    if (!validDate(date.value) || !slotsFor(date.value).includes(time.value)) {
+      resetToBooking(); showError('Please select a valid date and preferred time.'); return;
+    }
+    if (details.hidden) {enterDetails();return;}
+    for (const field of ['customer-name','customer-phone','customer-email','request-consent'].map($)) {
+      if (!field.checkValidity()) {
+        showError('Please complete your contact details and accept the booking request notice.');
+        field.reportValidity(); field.focus(); return;
+      }
+    }
+    showError('');
+    const chosen = services[service.value] || services.haircut;
+    $('submitted-service').value = chosen.name;
+    $('submitted-price').value = `£${chosen.price}`;
+    $('submitted-date').value = britishDate(date.value);
+    $('submitted-time').value = `${time.value} (UK time)`;
+    $('booking-subject').value = `EDZ Barber | Booking request: ${chosen.name} £${chosen.price}`;
+    const payload = Object.fromEntries(new FormData(form).entries());
+    sending = true;
+    submitButton.disabled = true;
+    submitButton.textContent = 'Sending request…';
+    result.hidden = true;
     try {
-      const response=await fetch(form.action, {method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload)});
-      const result=await response.json();
-      if (!response.ok || result.success !== true) throw new Error('Web3Forms did not accept this request');
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await response.json();
+      if (!response.ok || data.success !== true) throw new Error('Web3Forms could not accept the form');
       if (typeof window.edzTrackSuccessfulBooking === 'function') window.edzTrackSuccessfulBooking();
-      form.hidden=true;
-      setStatus('success','Request sent ✓',`Thanks! Your request for ${s.name} on ${showBritishDate(date.value)} at ${selectedTime} was submitted. I'll check my diary and reply by WhatsApp Business or email. Your appointment is NOT confirmed yet — please wait for my reply before travelling.`);
-      const again=document.createElement('button');again.type='button';again.textContent='SEND ANOTHER REQUEST';
-      again.addEventListener('click',()=>{form.reset();form.hidden=false;selectedTime='';pending=false;submit.disabled=false;submit.innerHTML='SEND BOOKING REQUEST <span aria-hidden="true">↗</span>';status.hidden=true;chooseService('haircut');refreshDate();setStep(0);$('#booking').scrollIntoView({behavior:'smooth'});});
-      status.appendChild(again);
-      status.scrollIntoView({behavior:'smooth',block:'nearest'});
+      const successDate = britishDate(date.value);
+      const successTime = time.value;
+      form.hidden = true;
+      resultMessage('success', 'Your request was sent',
+        `Thank you! I've received your request for ${chosen.name} on ${successDate} at ${successTime}. I'll check my diary and reply by WhatsApp Business or email. Your appointment is NOT confirmed until I reply — please wait before travelling.`);
+      const again = document.createElement('button'); again.type = 'button';
+      again.textContent = 'Send another request';
+      again.addEventListener('click', () => {
+        form.reset(); form.hidden = false; result.hidden = true;
+        selectors.hidden = false; details.hidden = true; hint.hidden = false;
+        time.value = ''; updateTimes(); section.scrollIntoView({behavior:'smooth',block:'start'});
+      });
+      result.append(again);
+      result.scrollIntoView({behavior:'smooth',block:'center'});
     } catch (err) {
-      setStatus('error','Unable to send your request','Please check your connection and try again. If it continues, email edzbarber.bookings@gmail.com with your service, date and time. No appointment has been confirmed.');
-      const retry=document.createElement('button');retry.type='button';retry.textContent='TRY AGAIN';retry.addEventListener('click',()=>{status.hidden=true;});status.appendChild(retry);
+      resultMessage('error', 'Request not sent',
+        'Sorry, your request could not be submitted. Please try again. Alternatively, email edzbarber.bookings@gmail.com with your service, date and preferred time. No appointment has been confirmed.');
+      const retry = document.createElement('button'); retry.type = 'button'; retry.textContent = 'Try again';
+      retry.addEventListener('click', () => { result.hidden = true; }); result.append(retry);
     } finally {
-      if (!form.hidden) {pending=false;submit.disabled=false;submit.innerHTML='SEND BOOKING REQUEST <span aria-hidden="true">↗</span>';}
+      sending = false;
+      submitButton.disabled = false;
+      submitButton.innerHTML = 'Send Booking Request <svg class="icon" aria-hidden="true"><use href="#ic-arrow"/></svg>';
     }
   });
-  const menu=$('.menu-toggle'),nav=$('.main-nav');
-  if(menu&&nav){menu.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')==='true';menu.setAttribute('aria-expanded',String(!open));menu.setAttribute('aria-label',open?'Open navigation':'Close navigation');nav.classList.toggle('open',!open);});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.setAttribute('aria-label','Open navigation');}));}
-  const floatingBar=$('.mobile-sticky');
-  if (floatingBar && 'IntersectionObserver' in window) {
-    const observer=new IntersectionObserver(entries => {
-      floatingBar.classList.toggle('is-hidden', entries[0].isIntersecting);
-    }, {threshold:0.12});
-    observer.observe($('#booking'));
+  const menu = document.querySelector('.menu-button');
+  const nav = $('main-nav');
+  if (menu && nav) {
+    menu.addEventListener('click', () => {
+      const open = menu.getAttribute('aria-expanded') === 'true';
+      menu.setAttribute('aria-expanded', String(!open));
+      menu.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
+      nav.classList.toggle('open', !open);
+    });
+    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      nav.classList.remove('open'); menu.setAttribute('aria-expanded','false');
+      menu.setAttribute('aria-label','Open menu');
+    }));
   }
-  $('#year').textContent=String(new Date().getFullYear());
-  setStep(0);
+  const sticky = document.querySelector('.sticky-book');
+  if (sticky && 'IntersectionObserver' in window) {
+    new IntersectionObserver(entries => {
+      sticky.classList.toggle('is-hidden', entries[0].isIntersecting);
+    }, {threshold:0.05}).observe(section);
+  }
+  const year = $('year');
+  if (year) year.textContent = new Date().getFullYear();
+  date.min = todayISO(); date.max = maxDateISO(); updateTimes();
 })();
