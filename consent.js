@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   // New consent version: prior Google-only consent is not reused for Meta.
-  const STORE_KEY = 'edz_ads_consent_google_meta_v2';
+  const STORE_KEY = 'edz_ads_consent_google_meta_v3';
   const META_PIXEL_ID = '1076609655424186';
   const TAG_ID = 'AW-18502199382';
   const BOOKING_CONVERSION = 'AW-18502199382/_NF6CO7CpLMdENbQxPZE';
@@ -88,7 +88,9 @@
     consentUpdate(true);
     loadTag();
     loadMetaPixel();
-  } else if (choice !== 'rejected') {
+  } else if (choice === 'rejected') {
+    consentUpdate(false);
+  } else {
     showBanner();
   }
 

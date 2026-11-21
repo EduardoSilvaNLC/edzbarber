@@ -274,3 +274,16 @@ img{max-width:100%;display:block}
   .hero-address {align-items:flex-start;line-height:1.5;}
   .hero-address .icon {margin-top:2px;}
 }
+
+/* 2026-11-21: daily opening hours + easier cookie management */
+.booking-hours{display:flex;align-items:center;gap:7px;margin:13px 0 3px;font-size:12px;line-height:1.45;color:var(--cocoa-dark)}
+.booking-hours strong{font-weight:600}
+.booking-hours .icon{height:16px;width:16px;color:var(--cocoa);flex-shrink:0}
+.nav-cookies{display:none}
+@media(max-width:760px){
+ .site-nav .nav-cookies{display:block;text-align:left;background:transparent;border:0;border-bottom:1px solid var(--line);padding:13px 9px;font-weight:500;font-size:14px;color:var(--cocoa)}
+ .booking-hours{font-size:11px;flex-wrap:wrap;margin-top:12px}
+ .cookie-banner{z-index:1200}
+ .cookie-banner-actions{flex-wrap:wrap}
+ .cookie-banner-actions button{min-width:min(100%,145px)}
+}

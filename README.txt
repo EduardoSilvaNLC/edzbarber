@@ -1,3 +1,32 @@
+EDZ BARBER — COOKIE CONSENT & HOURS FIX (21 November 2026)
+==========================================================
+Changes:
+1) Cookie banner shows for visitors who have not responded to the updated v3 consent.
+   Accept and reject options appear on the banner. Either option saves a choice.
+   A visitor can change it later via footer “Cookie settings” or mobile menu.
+   Google Ads and Meta Pixel do not load until optional consent is accepted.
+   If the user revokes consent, the page reloads to remove loaded trackers.
+2) Every day Monday–Sunday: 09:00, 10:00, 11:00, 12:00, 13:00,
+   14:00, 15:00, 16:00, 17:00, 18:00 and 19:00.
+   The appointment at 19:00 finishes around 20:00.
+   Past and too-soon times on the same date are hidden (60-minute lead).
+   These are request times, not confirmed availability.
+3) Page now displays “Monday–Sunday · 09:00–19:00” beside the booking.
+4) HTML references scripts/styles with a versioned URL to help avoid stale files
+   when you upload to Vercel.
+5) Same EDZ Barber branding, mobile layout adjustments, photos, pricing and
+   existing Web3Forms access key remain.
+
+DEPLOYMENT
+Extract this ZIP directly to the ROOT of the site project (index.html at root);
+then deploy the new build to Vercel. Replace ALL files, not just index.html.
+After deployment, test booking for a future date (Monday and Sunday) and
+check the time selector includes 09:00 through 19:00.
+Test cookie banner using an incognito/private tab for the first-time visitor;
+after rejecting or accepting, it is normal that it does not pop up again
+until the visitor opens Cookie settings.
+Submit a test booking and confirm the email actually arrives from Web3Forms.
+
 EDZ BARBER — LIGHT CREAM & SOFT BROWN WEBSITE
 ================================================
 Version: 21 November 2026 — updated booking times
