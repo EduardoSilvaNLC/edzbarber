@@ -1442,7 +1442,7 @@ img {
   .hero-photo img {
     position: static;
     object-fit: cover;
-    object-position: 50% 27%
+    object-position: 50% 35%
   }
 
   .hero-photo:before {
