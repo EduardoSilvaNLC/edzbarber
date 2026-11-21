@@ -79,7 +79,7 @@
     time.value = slots.includes(previous) ? previous : '';
     time.disabled = slots.length === 0;
     hint.textContent = slots.length
-      ? '. All requests need manual confirmation; no online payment.'
+      ? 'All requests need manual confirmation; no online payment.'
       : 'Choose a date to see preferred request times. These are not live availability.';
     showError('');
   }
