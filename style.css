@@ -258,3 +258,19 @@ img{max-width:100%;display:block}
 }
 @media(max-width:370px){.brand img{width:174px}.booking-heading h2{font-size:22px}.booking-card{padding:17px 14px}.gallery-grid img{height:125px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+
+/* EDZ Barber first: identity and full address remain legible at mobile widths. */
+.hero-address strong {font-weight:600;color:var(--cocoa-dark)}
+.location-grid address strong {font-size:17px}
+@media(max-width:760px) {
+  html {overflow-x:clip;}
+  body {overflow-x:clip;max-width:100%;}
+  .container {width:calc(100% - 30px);max-width:620px;}
+  .booking-card,.booking-selectors,.form-control,.select-wrapper {max-width:100%;min-width:0;}
+  .booking-card {overflow:hidden;}
+  .form-control select,.form-control input {display:block;width:100%;max-width:100%;min-width:0;}
+  .form-control input[type=date] {display:block;-webkit-appearance:none;appearance:none;min-width:0;width:100%;max-width:100%;text-align:left;}
+  .form-control input[type=date]::-webkit-date-and-time-value {text-align:left;min-width:0;}
+  .hero-address {align-items:flex-start;line-height:1.5;}
+  .hero-address .icon {margin-top:2px;}
+}
