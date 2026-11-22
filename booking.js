@@ -104,7 +104,7 @@
     const a = document.createElement('strong');
     a.textContent = `${picked.name} — £${picked.price}`;
     const b = document.createElement('span');
-    b.textContent = `${britishDate(date.value)} at ${time.value} (UK time)`;
+    b.textContent = `${britishDate(date.value)} at ${time.value} `;
     $('booking-summary').append(a, b);
     // Remove focus from the Continue button before hiding it. On iOS browsers,
     // a focused control disappearing can cause scroll anchoring/jumping.
