@@ -79,7 +79,7 @@
     time.value = slots.includes(previous) ? previous : '';
     time.disabled = slots.length === 0;
     hint.textContent = slots.length
-      ? 'Preferred times in UK local time (24-hour clock). All requests need manual confirmation; no online payment.'
+      ? 'All requests need manual confirmation; no online payment.'
       : 'Choose a date to see preferred request times. These are not live availability.';
     showError('');
   }
@@ -87,7 +87,7 @@
     details.hidden = true;
     selectors.hidden = false;
     hint.hidden = false;
-    continueButton.focus({preventScroll:true});
+    continueButton.focus({ preventScroll: true });
   }
   function enterDetails() {
     showError('');
@@ -119,7 +119,7 @@
     const title = details.querySelector('h3');
     if (title) {
       title.setAttribute('tabindex', '-1');
-      title.focus({preventScroll: true});
+      title.focus({ preventScroll: true });
     }
 
     // One immediate, stable reposition on narrow screens — no smooth animation
@@ -154,7 +154,7 @@
       const value = button.getAttribute('data-book-service');
       if (services[value]) service.value = value;
       if (!details.hidden) resetToBooking();
-      section.scrollIntoView({behavior:'smooth',block:'start'});
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
   form.addEventListener('submit', async (event) => {
@@ -163,8 +163,8 @@
     if (!validDate(date.value) || !slotsFor(date.value).includes(time.value)) {
       resetToBooking(); showError('Please select a valid date and preferred time.'); return;
     }
-    if (details.hidden) {enterDetails();return;}
-    for (const field of ['customer-name','customer-phone','customer-email','request-consent'].map($)) {
+    if (details.hidden) { enterDetails(); return; }
+    for (const field of ['customer-name', 'customer-phone', 'customer-email', 'request-consent'].map($)) {
       if (!field.checkValidity()) {
         showError('Please complete your contact details and accept the booking request notice.');
         field.reportValidity(); field.focus(); return;
@@ -175,7 +175,7 @@
     $('submitted-service').value = chosen.name;
     $('submitted-price').value = `£${chosen.price}`;
     $('submitted-date').value = britishDate(date.value);
-    $('submitted-time').value = `${time.value} (UK time)`;
+    $('submitted-time').value = `${time.value} `;
     $('booking-subject').value = `EDZ Barber | Booking request: ${chosen.name} £${chosen.price}`;
     const payload = Object.fromEntries(new FormData(form).entries());
     sending = true;
@@ -194,16 +194,16 @@
       const successTime = time.value;
       form.hidden = true;
       resultMessage('success', 'Your request was sent',
-        `Thank you! I've received your request for ${chosen.name} on ${successDate} at ${successTime}. I'll check my diary and reply by WhatsApp Business or email. Your appointment is NOT confirmed until I reply — please wait before travelling.`);
+        `Thank you! I've received your request for ${chosen.name} on ${successDate} at ${successTime}. I'll check my diary and reply by WhatsApp Business or Email. Your appointment is NOT confirmed until I reply — please wait before travelling.`);
       const again = document.createElement('button'); again.type = 'button';
       again.textContent = 'Send another request';
       again.addEventListener('click', () => {
         form.reset(); form.hidden = false; result.hidden = true;
         selectors.hidden = false; details.hidden = true; hint.hidden = false;
-        time.value = ''; updateTimes(); section.scrollIntoView({behavior:'smooth',block:'start'});
+        time.value = ''; updateTimes(); section.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
       result.append(again);
-      result.scrollIntoView({behavior:'smooth',block:'center'});
+      result.scrollIntoView({ behavior: 'smooth', block: 'center' });
     } catch (err) {
       resultMessage('error', 'Request not sent',
         'Sorry, your request could not be submitted. Please try again. Alternatively, email edzbarber.bookings@gmail.com with your service, date and preferred time. No appointment has been confirmed.');
@@ -225,15 +225,15 @@
       nav.classList.toggle('open', !open);
     });
     nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      nav.classList.remove('open'); menu.setAttribute('aria-expanded','false');
-      menu.setAttribute('aria-label','Open menu');
+      nav.classList.remove('open'); menu.setAttribute('aria-expanded', 'false');
+      menu.setAttribute('aria-label', 'Open menu');
     }));
   }
   const sticky = document.querySelector('.sticky-book');
   if (sticky && 'IntersectionObserver' in window) {
     new IntersectionObserver(entries => {
       sticky.classList.toggle('is-hidden', entries[0].isIntersecting);
-    }, {threshold:0.05}).observe(section);
+    }, { threshold: 0.05 }).observe(section);
   }
   const year = $('year');
   if (year) year.textContent = new Date().getFullYear();
