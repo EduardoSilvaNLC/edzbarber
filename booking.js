@@ -79,7 +79,7 @@
     time.value = slots.includes(previous) ? previous : '';
     time.disabled = slots.length === 0;
     hint.textContent = slots.length
-      ? 'All requests need manual confirmation; no online payment.'
+      ? 'Preferred times in UK local time (24-hour clock). All requests need manual confirmation; no online payment.'
       : 'Choose a date to see preferred request times. These are not live availability.';
     showError('');
   }
@@ -87,7 +87,7 @@
     details.hidden = true;
     selectors.hidden = false;
     hint.hidden = false;
-    continueButton.focus({ preventScroll: true });
+    continueButton.focus({preventScroll:true});
   }
   function enterDetails() {
     showError('');
@@ -106,11 +106,31 @@
     const b = document.createElement('span');
     b.textContent = `${britishDate(date.value)} at ${time.value} (UK time)`;
     $('booking-summary').append(a, b);
+    // Remove focus from the Continue button before hiding it. On iOS browsers,
+    // a focused control disappearing can cause scroll anchoring/jumping.
+    continueButton.blur();
     selectors.hidden = true;
     hint.hidden = true;
     details.hidden = false;
-    $('customer-name').focus({ preventScroll: true });
-    if (window.innerWidth < 760) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    // Announce the new step without automatically opening the iPhone keyboard.
+    // Focusing the name input here used to resize the visual viewport in Safari
+    // and Instagram's embedded browser, making the page appear to stretch.
+    const title = details.querySelector('h3');
+    if (title) {
+      title.setAttribute('tabindex', '-1');
+      title.focus({preventScroll: true});
+    }
+
+    // One immediate, stable reposition on narrow screens — no smooth animation
+    // and no second scroll caused by autofocusing a text field.
+    if (window.matchMedia('(max-width: 760px)').matches) {
+      const root = document.documentElement;
+      const previous = root.style.scrollBehavior;
+      root.style.scrollBehavior = 'auto';
+      window.scrollTo(0, Math.max(0, section.getBoundingClientRect().top + window.scrollY - 8));
+      root.style.scrollBehavior = previous;
+    }
   }
   function resultMessage(type, title, message) {
     result.hidden = false;
@@ -134,7 +154,7 @@
       const value = button.getAttribute('data-book-service');
       if (services[value]) service.value = value;
       if (!details.hidden) resetToBooking();
-      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      section.scrollIntoView({behavior:'smooth',block:'start'});
     });
   });
   form.addEventListener('submit', async (event) => {
@@ -143,8 +163,8 @@
     if (!validDate(date.value) || !slotsFor(date.value).includes(time.value)) {
       resetToBooking(); showError('Please select a valid date and preferred time.'); return;
     }
-    if (details.hidden) { enterDetails(); return; }
-    for (const field of ['customer-name', 'customer-phone', 'customer-email', 'request-consent'].map($)) {
+    if (details.hidden) {enterDetails();return;}
+    for (const field of ['customer-name','customer-phone','customer-email','request-consent'].map($)) {
       if (!field.checkValidity()) {
         showError('Please complete your contact details and accept the booking request notice.');
         field.reportValidity(); field.focus(); return;
@@ -180,10 +200,10 @@
       again.addEventListener('click', () => {
         form.reset(); form.hidden = false; result.hidden = true;
         selectors.hidden = false; details.hidden = true; hint.hidden = false;
-        time.value = ''; updateTimes(); section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        time.value = ''; updateTimes(); section.scrollIntoView({behavior:'smooth',block:'start'});
       });
       result.append(again);
-      result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      result.scrollIntoView({behavior:'smooth',block:'center'});
     } catch (err) {
       resultMessage('error', 'Request not sent',
         'Sorry, your request could not be submitted. Please try again. Alternatively, email edzbarber.bookings@gmail.com with your service, date and preferred time. No appointment has been confirmed.');
@@ -205,15 +225,15 @@
       nav.classList.toggle('open', !open);
     });
     nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      nav.classList.remove('open'); menu.setAttribute('aria-expanded', 'false');
-      menu.setAttribute('aria-label', 'Open menu');
+      nav.classList.remove('open'); menu.setAttribute('aria-expanded','false');
+      menu.setAttribute('aria-label','Open menu');
     }));
   }
   const sticky = document.querySelector('.sticky-book');
   if (sticky && 'IntersectionObserver' in window) {
     new IntersectionObserver(entries => {
       sticky.classList.toggle('is-hidden', entries[0].isIntersecting);
-    }, { threshold: 0.05 }).observe(section);
+    }, {threshold:0.05}).observe(section);
   }
   const year = $('year');
   if (year) year.textContent = new Date().getFullYear();
