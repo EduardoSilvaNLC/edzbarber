@@ -16,9 +16,9 @@
   const hint = $('date-help');
   const schedule = window.EDZ_BOOKING_SCHEDULE || {};
   const services = {
-    haircut: { name: "Men's Haircut", price: 15 },
+    haircut: { name: "Men's Haircut", price: 20 },
     beard: { name: 'Beard Trim', price: 7 },
-    both: { name: 'Haircut + Beard', price: 22 }
+    both: { name: 'Haircut + Beard', price: 27 }
   };
   const regular = schedule.regularDayTimes || ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
   const dayOff = schedule.dayOffTimes || ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
