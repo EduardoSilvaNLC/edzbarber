@@ -1809,3 +1809,26 @@ img {
     min-width: min(100%, 145px)
   }
 }
+
+/* Promotional booking code: EDZ Barber light cream / cocoa */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.promo-section{margin-top:13px;padding:14px 17px;background:#fffaf6;border:1px solid #e6d9ce;border-radius:12px;min-width:0}
+.promo-toggle{display:flex;align-items:center;gap:9px;width:100%;padding:0;color:#744329;border:0;background:transparent;text-align:left;font-size:14px;font-weight:600;min-height:24px}
+.promo-toggle:hover{text-decoration:underline;text-underline-offset:4px}
+.promo-tag{width:19px;height:19px;flex-shrink:0}
+.promo-toggle-arrow{margin-left:auto;font-size:19px;line-height:1;transition:transform .2s}
+.promo-toggle[aria-expanded=true] .promo-toggle-arrow{transform:rotate(180deg)}
+#promo-details{margin-top:12px}
+.promo-input-row{display:flex;gap:9px;width:100%;max-width:490px;min-width:0}
+.promo-input-row input{min-width:0;flex:1;width:100%;height:43px;border:1px solid #d9c9bf;border-radius:9px;background:white;color:#322017;padding:0 14px;font-size:14px;text-transform:uppercase;letter-spacing:.5px}
+.promo-input-row button{flex-shrink:0;border:0;background:#744329;color:white;font-weight:600;font-size:13px;padding:0 20px;border-radius:9px}
+.promo-input-row button:hover{background:#4d2a19}
+.promo-message{margin:9px 0 0;color:#516f43;font-size:12px;line-height:1.4}
+.promo-message.is-error{color:#a54035}
+.promo-price{display:flex;align-items:center;gap:12px;flex-wrap:wrap;border-top:1px solid #e9dcd0;margin-top:13px;padding-top:13px;font-size:14px;color:#443127}
+.promo-price>span:first-child{margin-right:auto}
+.promo-old{color:#85776d;text-decoration:line-through}
+.promo-price strong{color:#744329;font-size:25px;line-height:1.1}
+.promo-saved{padding:4px 8px;border-radius:5px;background:#e9f3e6;color:#326733;font-weight:600;font-size:11px}
+@media(max-width:760px){.promo-section{margin-top:12px;padding:13px 14px;border-radius:13px}.promo-input-row{max-width:100%}.promo-input-row button{padding:0 17px}.promo-price>span:first-child{width:100%;margin-right:0}.promo-price{gap:8px}}
+

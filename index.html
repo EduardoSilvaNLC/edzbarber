@@ -23,10 +23,10 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <title>EDZ Barber | Men's Haircuts in Cambridge from £20</title>
   <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments) } gtag('consent', 'default', { ad_storage: 'denied', analytics_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' }); gtag('js', new Date());</script>
-  <link rel="stylesheet" href="style.css?v=20261122-4">
+  <link rel="stylesheet" href="style.css?v=20261127-promo1">
   <script src="consent.js?v=20261121-3" defer></script>
   <script src="schedule.js?v=20261121-3" defer></script>
-  <script src="booking.js?v=20261122-4" defer></script>
+  <script src="booking.js?v=20261127-promo-fixed1" defer></script>
   <script
     type="application/ld+json">{"@context":"https://schema.org","@type":"HairSalon","name":"EDZ Barber","url":"https://www.edzbarber.co.uk/","image":"https://www.edzbarber.co.uk/assets/cut-classic.webp","description":"Independent EDZ Barber men's haircuts, fades and beard trims, inside Novo Studios in Cambridge. Booking requests are personally confirmed.","priceRange":"£7–£27","address":{"@type":"PostalAddress","streetAddress":"47–51 Norfolk Street","addressLocality":"Cambridge","postalCode":"CB1 2LD","addressCountry":"GB"},"sameAs":["https://www.instagram.com/edzbarber/"]}</script>
 </head>
@@ -112,7 +112,8 @@
               </div>
             </div>
             <form id="booking-request-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
-              <input name="access_key" type="hidden" value="c25bfc3a-6f18-4bb9-8f61-29de231f1bf9">
+
+              <input type="hidden" name="access_key" value="c25bfc3a-6f18-4bb9-8f61-29de231f1bf9">
               <input name="subject" id="booking-subject" type="hidden" value="EDZ Barber — Booking request">
               <input name="from_name" type="hidden" value="EDZ Barber Bookings">
               <input name="service" id="submitted-service" type="hidden">
@@ -154,6 +155,26 @@
                     class="icon" aria-hidden="true">
                     <use href="#ic-arrow" />
                   </svg></button>
+              </div>
+              <div class="promo-section" id="promo-section" aria-label="Promotional discount">
+                <button type="button" class="promo-toggle" id="promo-toggle" aria-expanded="false" aria-controls="promo-details">
+                  <svg class="promo-tag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M3 12.5V5a2 2 0 0 1 2-2h7.5l8.5 8.5a2 2 0 0 1 0 2.8l-6.7 6.7a2 2 0 0 1-2.8 0L3 12.5Z"/><circle cx="8.5" cy="8.5" r="1.3" /></svg>
+                  <span>Have a promo code?</span><span class="promo-toggle-arrow" aria-hidden="true">⌄</span>
+                </button>
+                <div id="promo-details" hidden>
+                  <div class="promo-input-row">
+                    <label class="sr-only" for="promo-code">Promo code</label>
+                    <input id="promo-code" type="text" placeholder="Enter your code" autocomplete="off" spellcheck="false" maxlength="30">
+                    <button type="button" id="promo-apply">Apply</button>
+                  </div>
+                  <p class="promo-message" id="promo-message" role="status" aria-live="polite"></p>
+                </div>
+                <div id="promo-price" class="promo-price" hidden>
+                  <span>Haircut total</span>
+                  <span class="promo-old">£20</span>
+                  <strong>£15</strong>
+                  <span class="promo-saved">You save £5</span>
+                </div>
               </div>
               <p class="booking-hours"><svg class="icon" aria-hidden="true">
                   <use href="#ic-clock" />

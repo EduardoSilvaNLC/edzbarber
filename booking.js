@@ -28,6 +28,72 @@
   const leadMinutes = Number(schedule.minimumLeadMinutes) || 60;
   const maxDaysAhead = Number(schedule.maxDaysAhead) || 90;
   let sending = false;
+  const promoToggle = $('promo-toggle');
+  const promoDetails = $('promo-details');
+  const promoInput = $('promo-code');
+  const promoApply = $('promo-apply');
+  const promoMessage = $('promo-message');
+  const promoPrice = $('promo-price');
+  let activePromo = null;
+  let validatingPromo = false;
+
+  function clearPromo() {
+    activePromo = null;
+    promoPrice.hidden = true;
+    promoMessage.textContent = '';
+    promoMessage.classList.remove('is-error');
+  }
+  promoToggle.addEventListener('click', () => {
+    promoDetails.hidden = !promoDetails.hidden;
+    promoToggle.setAttribute('aria-expanded', String(!promoDetails.hidden));
+  });
+  promoInput.addEventListener('input', clearPromo);
+  promoInput.addEventListener('keydown', event => {
+    if (event.key === 'Enter') { event.preventDefault(); promoApply.click(); }
+  });
+  promoApply.addEventListener('click', async () => {
+    if (validatingPromo) return;
+    clearPromo();
+    const code = promoInput.value.trim().toUpperCase();
+    if (!code) {
+      promoMessage.textContent = 'Enter a promo code first.';
+      promoMessage.classList.add('is-error');
+      return;
+    }
+    validatingPromo = true;
+    promoApply.disabled = true;
+    promoApply.textContent = 'Checking…';
+    const selectedService = service.value;
+    try {
+      const response = await fetch('/api/promo', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ code, service: service.value })
+      });
+      const data = await response.json();
+      // Ignore an old response if the visitor changed the code or service mid-check.
+      if (selectedService !== service.value || code !== promoInput.value.trim().toUpperCase()) return;
+      if (!response.ok || !data.valid) {
+        promoMessage.textContent = data.message || 'Invalid or expired promo code.';
+        promoMessage.classList.add('is-error');
+        return;
+      }
+      activePromo = { code: data.code, discount: data.discount, price: data.total };
+      promoPrice.querySelector('.promo-old').textContent = `£${data.regularPrice}`;
+      promoPrice.querySelector('strong').textContent = `£${data.total}`;
+      promoPrice.querySelector('.promo-saved').textContent = `You save £${data.discount}`;
+      promoPrice.querySelector('span:first-child').textContent = data.serviceName + ' total';
+      promoPrice.hidden = false;
+      promoMessage.textContent = `Code ${data.code} applied — £${data.discount} off your haircut.`;
+    } catch (_) {
+      promoMessage.textContent = 'Could not check your code. Please try again.';
+      promoMessage.classList.add('is-error');
+    } finally {
+      validatingPromo = false;
+      promoApply.disabled = false;
+      promoApply.textContent = 'Apply';
+    }
+  });
 
   // UK time is authoritative even if someone visits the site from another timezone.
   const ukParts = () => Object.fromEntries(new Intl.DateTimeFormat('en-GB', {
@@ -91,6 +157,10 @@
   }
   function enterDetails() {
     showError('');
+    if (promoInput.value.trim() && !activePromo) {
+      showError('Please click Apply to check your promo code, or clear the code to continue without a discount.');
+      return;
+    }
     if (!validDate(date.value)) {
       showError('Please choose an available future date.');
       date.focus(); return;
@@ -102,7 +172,7 @@
     const picked = services[service.value] || services.haircut;
     $('booking-summary').replaceChildren();
     const a = document.createElement('strong');
-    a.textContent = `${picked.name} — £${picked.price}`;
+    a.textContent = activePromo ? `${picked.name} — £${activePromo.price} (promo ${activePromo.code}; regular £${picked.price})` : `${picked.name} — £${picked.price}`;
     const b = document.createElement('span');
     b.textContent = `${britishDate(date.value)} at ${time.value} `;
     $('booking-summary').append(a, b);
@@ -142,7 +212,7 @@
   }
   date.addEventListener('change', updateTimes);
   date.addEventListener('input', updateTimes);
-  service.addEventListener('change', () => showError(''));
+  service.addEventListener('change', () => { showError(''); clearPromo(); });
   time.addEventListener('change', () => showError(''));
   continueButton.addEventListener('click', enterDetails);
   $('edit-selection').addEventListener('click', () => {
@@ -152,7 +222,7 @@
   document.querySelectorAll('[data-book-service]').forEach(button => {
     button.addEventListener('click', () => {
       const value = button.getAttribute('data-book-service');
-      if (services[value]) service.value = value;
+      if (services[value]) { service.value = value; clearPromo(); }
       if (!details.hidden) resetToBooking();
       section.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
@@ -172,17 +242,51 @@
     }
     showError('');
     const chosen = services[service.value] || services.haircut;
-    $('submitted-service').value = chosen.name;
-    $('submitted-price').value = `£${chosen.price}`;
-    $('submitted-date').value = britishDate(date.value);
-    $('submitted-time').value = `${time.value} `;
-    $('booking-subject').value = `EDZ Barber | Booking request: ${chosen.name} £${chosen.price}`;
-    const payload = Object.fromEntries(new FormData(form).entries());
+    const promoCode = activePromo ? activePromo.code : '';
+    if (promoInput.value.trim() && !promoCode) {
+      showError('Please click Apply to check the code, or clear the field to continue at the regular price.');
+      return;
+    }
     sending = true;
     submitButton.disabled = true;
     submitButton.textContent = 'Sending request…';
     result.hidden = true;
     try {
+      let quote = null;
+      // Only discounted bookings require server-signed verification.
+      // Normal bookings can continue to use Web3Forms even if Vercel API is down.
+      if (promoCode) {
+        const quoteResponse = await fetch('/api/quote', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            service: service.value, date: date.value, time: time.value,
+            promo_code: promoCode,
+            name: $('customer-name').value, phone: $('customer-phone').value,
+            email: $('customer-email').value,
+            request_acknowledged: $('request-consent').checked ? 'Yes' : 'No'
+          })
+        });
+        quote = await quoteResponse.json();
+        if (!quoteResponse.ok || quote.success !== true || quote.promoCode !== promoCode || quote.total !== 15) {
+          showError(quote.message || 'Promo code could not be validated. Please try again or remove it.');
+          return;
+        }
+      }
+      // Web3Forms is called from the browser, NOT from a Vercel function.
+      const regularPrice = chosen.price;
+      const finalPrice = quote ? quote.total : regularPrice;
+      const discount = quote ? quote.discount : 0;
+      const payload = Object.fromEntries(new FormData(form).entries());
+      payload.service = chosen.name;
+      payload.regular_price = `£${regularPrice}`;
+      payload.discount = `£${discount}`;
+      payload.promo_code = quote ? quote.promoCode : 'None';
+      payload.price = `£${finalPrice}`;
+      payload.preferred_date = britishDate(date.value);
+      payload.preferred_time = time.value;
+      payload.subject = `EDZ Barber | Booking request: ${chosen.name} £${finalPrice}${quote ? ' [PROMO EDZ5]' : ''}`;
+      payload.verified_quote = quote ? (window.location.origin + quote.verificationPath) : 'Standard price (no promo code)';
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify(payload)
@@ -194,11 +298,11 @@
       const successTime = time.value;
       form.hidden = true;
       resultMessage('success', 'Your request was sent',
-        `Thank you! I've received your request for ${chosen.name} on ${successDate} at ${successTime}. I'll check my diary and reply by WhatsApp Business or Email. Your appointment is NOT confirmed until I reply — please wait before travelling.`);
+        `Thank you! Your request for ${chosen.name} (£${finalPrice}${quote ? ` with code ${promoCode}` : ''}) on ${successDate} at ${successTime} was sent. I'll check my diary and reply by WhatsApp Business or Email. Your appointment is NOT confirmed until I reply — please wait before travelling.`);
       const again = document.createElement('button'); again.type = 'button';
       again.textContent = 'Send another request';
       again.addEventListener('click', () => {
-        form.reset(); form.hidden = false; result.hidden = true;
+        form.reset(); clearPromo(); promoDetails.hidden = true; promoToggle.setAttribute('aria-expanded','false'); form.hidden = false; result.hidden = true;
         selectors.hidden = false; details.hidden = true; hint.hidden = false;
         time.value = ''; updateTimes(); section.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
